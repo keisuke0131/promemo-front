@@ -3,12 +3,12 @@
     <div class="header-logo">
       <a href=""><img src="@/assets/image/logo.png" alt="" /></a>
     </div>
-    <a href="{" class="btn btn-sm btn-primary mr-1"
-      >登録する</a
-    >
-    <a href="" class="btn btn-sm btn-success mr-5"
-      >ログイン</a
-    >
+    <nav>
+      <ul>
+        <li><a href="" class="btn register-btn">登録する</a></li>
+        <li><a href="" class="btn login-btn">ログイン</a></li>
+      </ul>
+    </nav>
   </header>
 </template>
 
@@ -19,27 +19,45 @@ export default {};
 <style lang="scss" scoped>
 header {
   display: flex;
+  justify-content: flex-end;
   align-items: center;
-  position: relative;
+  position: fixed;
+  top: 0;
+  width: 100%;
   height: 60px;
   box-shadow: 0 2px 2px rgba(0, 0, 0, 0.05);
   background: rgb(239, 251, 255);
   text-align: center;
   .header-logo {
     display: inline-block;
-    margin: auto;
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    // -webkit-transform: translateX(-50%);Ï
+    margin:　auto;
     img {
       width: 150px;
     }
   }
-  .memo-btn {
+  nav {
+    ul {
+      display: flex;
+      li {
+        margin: 0 20px 0 0;
+      }
+    }
+  }
+  .btn {
     display: inline-block;
-    position: absolute;
-    right: 20px;
     padding: 5px 15px;
-    background: rgb(117, 189, 218);
     color: #fff;
-    font-size: 0.85em;
+    font-size: 1em;
+  }
+  .register-btn {
+    background: rgb(129, 170, 185);
+  }
+  .login-btn {
+    background: rgb(185, 142, 129);
   }
 }
 </style>

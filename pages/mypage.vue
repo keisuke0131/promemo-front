@@ -5,7 +5,7 @@
     <Sidebar />
     <div class="main-contents">
       <div class="memo" v-for="n of 12" :key="n">
-        <h3>タイトル</h3>
+        <h3>マイページ</h3>
         <p>テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト</p>
       </div>
     </div>
