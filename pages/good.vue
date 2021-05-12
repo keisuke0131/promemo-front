@@ -1,18 +1,20 @@
 <template>
-<div>
-  <Header />
-  <main>
-    <Sidebar />
-    <div class="main-contents">
-      <div class="memo" v-for="n of 12" :key="n">
-        <nuxt-link to="/">
-          <h3>タイトル</h3>
-          <p>テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト</p>
-        </nuxt-link>
+  <div>
+    <Header />
+    <main>
+      <Sidebar />
+      <div class="main-contents">
+        <div class="memo" v-for="n of 12" :key="n">
+          <nuxt-link to="/">
+            <h3>いいねした</h3>
+            <p>
+              テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+            </p>
+          </nuxt-link>
+        </div>
       </div>
-    </div>
-  </main>
-</div>
+    </main>
+  </div>
 </template>
 
 <script>
