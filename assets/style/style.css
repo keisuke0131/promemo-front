@@ -24,6 +24,7 @@ a:link,
 a:visited,
 a:active {
   text-decoration: none;
+  color: #111;
 }
 li {
   list-style: none;

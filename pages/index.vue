@@ -5,8 +5,10 @@
     <Sidebar />
     <div class="main-contents">
       <div class="memo" v-for="n of 12" :key="n">
-        <h3>タイトル</h3>
-        <p>テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト</p>
+        <nuxt-link to="/">
+          <h3>タイトル</h3>
+          <p>テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト</p>
+        </nuxt-link>
       </div>
     </div>
   </main>
