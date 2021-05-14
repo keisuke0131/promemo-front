@@ -2,7 +2,7 @@
   <aside>
     <ul>
       <li class="active"><nuxt-link to="/">みんなのメモ</nuxt-link></li>
-      <li><nuxt-link to="/mypage">自分のメモ</nuxt-link></li>
+      <li v-bind:class="{ active: isActive }">><nuxt-link to="/mypage">自分のメモ</nuxt-link></li>
       <li><nuxt-link to="/good">いいねした</nuxt-link></li>
     </ul>
   </aside>
