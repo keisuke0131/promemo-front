@@ -2,7 +2,7 @@
 <div>
   <Header />
   <main>
-    <Sidebar />
+    <Sidebar page="2" />
     <div class="main-contents">
       <div class="memo" v-for="n of 12" :key="n">
         <nuxt-link to="/">
