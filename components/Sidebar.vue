@@ -1,15 +1,36 @@
 <template>
   <aside>
     <ul>
-      <li class="active"><nuxt-link to="/">みんなのメモ</nuxt-link></li>
-      <li><nuxt-link to="/mypage">自分のメモ</nuxt-link></li>
-      <li><nuxt-link to="/good">いいねした</nuxt-link></li>
+      <li
+        v-on:click="activetab = 1"
+        v-bind:class="[activetab === 1 ? 'active' : '']"
+      >
+        <nuxt-link to="/">みんなのメモ</nuxt-link>
+      </li>
+      <li
+        v-on:click="activetab = 2"
+        v-bind:class="[activetab === 2 ? 'active' : '']"
+      >
+        <nuxt-link to="/mypage">自分のメモ</nuxt-link>
+      </li>
+      <li
+        v-on:click="activetab = 3"
+        v-bind:class="[activetab === 3 ? 'active' : '']"
+      >
+        <nuxt-link to="/good">いいねした</nuxt-link>
+      </li>
     </ul>
   </aside>
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      activetab: 1,
+    };
+  },
+};
 </script>
 
 <style lang="scss" scoped>
