@@ -1,22 +1,35 @@
 <template>
-<div>
-  <Header />
-  <main>
-    <Sidebar page="1" />
-    <div class="main-contents">
-      <div class="memo" v-for="n of 12" :key="n">
-        <nuxt-link to="/">
-          <h3>タイトル</h3>
-          <p>テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト</p>
-        </nuxt-link>
+  <div>
+    <Header />
+    <main>
+      <Sidebar page="1" />
+      <div class="main-contents">
+        <div class="memo" v-for="(post, index) in posts" :key="index">
+            <a :href="'post.url'" target="_blank" rel="noopener noreferrer">
+              <h3>{{ post.title }}</h3>
+              <p>
+                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+              </p>
+            </a>
+        </div>
       </div>
-    </div>
-  </main>
-</div>
+    </main>
+  </div>
 </template>
 
 <script>
-export default {};
+export default {
+  async asyncData({ $axios }) {
+    // 取得先のURL
+    const url = "https://qiita.com/api/v2/items";
+    // リクエスト（Get）
+    const response = await $axios.$get(url);
+    // 配列で返ってくるのでJSONにして返却
+    return {
+      posts: response,
+    };
+  },
+};
 </script>
 
 <style lang="scss" scoped>

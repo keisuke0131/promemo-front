@@ -17,24 +17,47 @@
         v-on:click="activetab = '3'"
         v-bind:class="[activetab === '3' ? 'active' : '']"
       >
-        <nuxt-link to="/good">いいねした</nuxt-link>
+        <nuxt-link to="/good">{{ data }}</nuxt-link>
       </li>
     </ul>
   </aside>
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   props: {
     page: {
       type: String,
-    }
+    },
   },
   data() {
     return {
+      data: "",
       activetab: this.page,
     };
-  }
+  },
+  // mounted() {
+  //   axios
+  //     .get("http://localhost:8000/api")
+  //     .then((response) => {
+  //       this.data = response.data;
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //       this.data = "ERROR";
+  //     });
+  // },
+  async asyncData({ $axios }) {
+    // 取得先のURL
+    const url = "http://localhost:8000/api";
+    // リクエスト（Get）
+    const data = await $axios.$get(url);
+    // 配列で返ってくるのでJSONにして返却
+    return {
+      data,
+    };
+  },
 };
 </script>
 
