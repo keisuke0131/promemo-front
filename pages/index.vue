@@ -4,11 +4,11 @@
     <main>
       <Sidebar page="1" />
       <div class="main-contents">
-        <div class="memo" v-for="(post, index) in posts" :key="index">
+        <div class="memo" v-for="(post, index) in Posts" :key="index">
             <a :href="'post.url'" target="_blank" rel="noopener noreferrer">
               <h3>{{ post.title }}</h3>
               <p>
-                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+                {{ post.content }}
               </p>
             </a>
         </div>
@@ -19,15 +19,65 @@
 
 <script>
 export default {
-  async asyncData({ $axios }) {
-    // 取得先のURL
-    const url = "https://qiita.com/api/v2/items";
-    // リクエスト（Get）
-    const response = await $axios.$get(url);
-    // 配列で返ってくるのでJSONにして返却
+  async fetch({ store }) {
+    const Posts = await store.dispatch("Posts/fetchList");
+    store.commit("Posts/setList", Posts);
+  },
+  data() {
     return {
-      posts: response,
+      dialogPost: {},
+      isShowDialog: false,
+      searchText: "",
     };
+  },
+  computed: {
+    Posts() {
+      return this.$store.getters["Posts/list"];
+    },
+    formTitle() {
+      return this.isPersistedPost ? "管理者編集" : "管理者追加";
+    },
+    headers() {
+      return [
+        { text: "ID", value: "id" },
+        { text: "投稿者", value: "user" },
+        { text: "名前", value: "title" },
+        { text: "コンテンツ", value: "content" },
+        { text: "", value: "edit-action" },
+        { text: "", value: "delete-action" },
+      ];
+    },
+    isPersistedPost() {
+      return !!this.dialogPost.id;
+    },
+  },
+  methods: {
+    closeDialog() {
+      this.isShowDialog = false;
+      setTimeout(() => {
+        this.dialogPost = {};
+      }, 1000);
+    },
+    //追加
+    onClickAddBtn() {
+      this.dialogPost = {};
+      this.isShowDialog = true;
+    },
+    onClickEditIcon(Post) {
+      this.dialogPost = Object.assign({}, Post);
+      this.isShowDialog = true;
+    },
+    async onClickCreateBtn() {
+      await this.$store.dispatch("Posts/create", this.dialogPost);
+      this.closeDialog();
+    },
+    async onClickDeleteIcon(Post) {
+      await this.$store.dispatch("Posts/delete", Post);
+    },
+    async onClickUpdateBtn() {
+      await this.$store.dispatch("Posts/update", this.dialogPost);
+      this.closeDialog();
+    },
   },
 };
 </script>

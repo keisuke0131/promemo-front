@@ -62,6 +62,11 @@ export default {
           title: "ユーザ一覧",
           to: "/",
         },
+        {
+          icon: "mdi-account",
+          title: "投稿一覧",
+          to: "/posts",
+        },
       ],
       miniVariant: false,
       title: "promemo 管理画面",
