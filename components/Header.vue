@@ -1,19 +1,31 @@
 <template>
   <header>
     <div class="header-logo">
-      <a href=""><img src="@/assets/image/logo.png" alt="" /></a>
+      <a href="http://localhost:8000/api/user"><img src="@/assets/image/logo.png" alt="" /></a>
     </div>
     <nav>
       <ul>
         <li><a href="" class="btn register-btn">登録する</a></li>
-        <li><a href="" class="btn login-btn">ログイン</a></li>
+        <li v-if="$store.state.auth.auth_user !== true"><nuxt-link to="/auth/login" class="btn login-btn">ログイン</nuxt-link></li>
+        <li v-else><button @click="logout" class="btn login-btn">ログアウト</button></li>
       </ul>
     </nav>
   </header>
 </template>
 
 <script>
-export default {};
+export default {
+  methods: {
+    async logout() {
+      this.$axios.post("http://localhost:8000/logout").then((response) => {
+        console.log(response)
+        this.$store.dispatch("auth/logoutAuthUser");
+      }).catch((err)=>{
+            
+        });
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -21,8 +33,8 @@ header {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  position: fixed;
-  top: 0;
+  // position: fixed;
+  // top: 0;
   width: 100%;
   height: 60px;
   box-shadow: 0 2px 2px rgba(0, 0, 0, 0.05);

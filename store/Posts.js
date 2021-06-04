@@ -34,28 +34,28 @@ export const state = () => ({
   
   export const actions = {
     async fetchList () {
-      return await this.$axios.$get('/posts')
+      return await this.$axios.$get('/api/posts')
         .catch(err => {
           console.log(err)
         })
     },
     //追加
     async create ({ commit }, Post) {
-      const response = await this.$axios.$post('/posts', Post)
+      const response = await this.$axios.$post('/api/posts', Post)
         .catch(err => {
           console.log(err)
         })
       commit('create', response)
     },
     async delete ({ commit }, Post) {
-      const response = await this.$axios.$delete(`/posts/${Post.id}`)
+      const response = await this.$axios.$delete(`/api/posts/${Post.id}`)
         .catch(err => {
           console.log(err)
         })
       commit('delete', response)
     },
     async update ({ commit }, Post) {
-      const response = await this.$axios.$patch(`/posts/${Post.id}`, Post)
+      const response = await this.$axios.$patch(`/api/posts/${Post.id}`, Post)
         .catch(err => {
           console.log(err)
         })

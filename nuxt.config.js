@@ -30,7 +30,7 @@ export default {
 
   axios: {
     baseURL: process.env.API_URL,
-    credentials: true
+    credentials: true,
   },
 
   build: {
