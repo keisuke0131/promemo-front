@@ -8,7 +8,7 @@
     <nav>
       <ul>
         <li><a href="" class="btn register-btn">登録する</a></li>
-        <li v-if="$store.state.auth.auth_user !== ''">
+        <li v-if="$store.state.auth.isLoggedIn === true">
           <button @click="logout" class="btn login-btn">ログアウト</button>
         </li>
         <li v-else>
@@ -49,7 +49,7 @@ header {
   text-align: center;
   .header-logo {
     display: inline-block;
-    position: fixed;
+    // position: fixed;
     left: 50%;
     transform: translateX(-50%);
     // -webkit-transform: translateX(-50%);Ï
