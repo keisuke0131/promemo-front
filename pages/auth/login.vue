@@ -39,7 +39,7 @@ export default {
           .post("/login", this.user)
           .then((res) => {
             this.$store.dispatch("auth/loginAuthUser");
-            console.log(res);
+            console.log(res.data);
             this.$router.push("/");
           })
           .catch((err) => {

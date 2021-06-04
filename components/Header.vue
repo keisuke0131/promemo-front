@@ -1,13 +1,19 @@
 <template>
   <header>
     <div class="header-logo">
-      <a href="http://localhost:8000/api/user"><img src="@/assets/image/logo.png" alt="" /></a>
+      <a href="http://localhost:8000/api/user"
+        ><img src="@/assets/image/logo.png" alt=""
+      /></a>
     </div>
     <nav>
       <ul>
         <li><a href="" class="btn register-btn">登録する</a></li>
-        <li v-if="$store.state.auth.auth_user !== true"><nuxt-link to="/auth/login" class="btn login-btn">ログイン</nuxt-link></li>
-        <li v-else><button @click="logout" class="btn login-btn">ログアウト</button></li>
+        <li v-if="$store.state.auth.auth_user !== ''">
+          <button @click="logout" class="btn login-btn">ログアウト</button>
+        </li>
+        <li v-else>
+          <nuxt-link to="/auth/login" class="btn login-btn">ログイン</nuxt-link>
+        </li>
       </ul>
     </nav>
   </header>
@@ -17,12 +23,13 @@
 export default {
   methods: {
     async logout() {
-      this.$axios.post("http://localhost:8000/logout").then((response) => {
-        console.log(response)
-        this.$store.dispatch("auth/logoutAuthUser");
-      }).catch((err)=>{
-            
-        });
+      this.$axios
+        .post("http://localhost:8000/logout")
+        .then((response) => {
+          console.log(response);
+          this.$store.dispatch("auth/logoutAuthUser");
+        })
+        .catch((err) => {});
     },
   },
 };
@@ -46,7 +53,7 @@ header {
     left: 50%;
     transform: translateX(-50%);
     // -webkit-transform: translateX(-50%);Ï
-    margin:　auto;
+    margin: auto;
     img {
       width: 150px;
     }
