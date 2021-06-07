@@ -16,9 +16,8 @@
               v-model="post.content"
             ></textarea>
           </div>
-          <button type="submit">送信</button>
+          <button type="submit" v-shortkey.once="['ctrl','s']" @shortkey="createPost">送信</button>
         </form>
-        <div v-html="html"></div>
       </div>
     </main>
   </div>

@@ -18,7 +18,7 @@ export default {
 
   css: ["@/assets/style/style.css"],
 
-  plugins: ["~/plugins/axios"],
+  plugins: ["~/plugins/axios","~/plugins/vue-shortkey.client.js"],
 
   components: true,
 

@@ -1,9 +1,9 @@
 <template>
   <header>
     <div class="header-logo">
-      <a href="http://localhost:8000/api/user"
+      <nuxt-link to="/"
         ><img src="@/assets/image/logo.png" alt=""
-      /></a>
+      /></nuxt-link>
     </div>
     <nav>
       <ul>
@@ -12,7 +12,8 @@
           <li>
             <button @click="logout" class="btn login-btn">ログアウト</button>
           </li>
-          <li><nuxt-link to="/posts/create">メモする</nuxt-link></li>
+          <li v-shortkey.once="['ctrl','e']" @shortkey="$router.push('/posts/create')"><nuxt-link to="/posts/create">メモする</nuxt-link></li>
+          <button type="button" class="btn btn-outline-primary"></button>
           <li class="account-dropdown-list">
             <span style="cursor: pointer" @click="isOpen = !isOpen"
               >アカウント名</span
@@ -57,6 +58,9 @@ export default {
         })
         .catch((err) => {});
     },
+    console(){
+      console.log('成功')
+    }
   },
 };
 </script>
