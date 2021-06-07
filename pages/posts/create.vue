@@ -18,7 +18,6 @@
           </div>
           <button type="submit">送信</button>
         </form>
-        <div v-html="html"></div>
       </div>
     </main>
   </div>

@@ -1,9 +1,9 @@
 <template>
   <header>
     <div class="header-logo">
-      <a href="http://localhost:8000/api/user"
+      <nuxt-link to="/"
         ><img src="@/assets/image/logo.png" alt=""
-      /></a>
+      /></nuxt-link>
     </div>
     <nav>
       <ul>
