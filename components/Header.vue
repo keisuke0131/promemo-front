@@ -26,7 +26,7 @@ export default {
       this.$axios
         .post("http://localhost:8000/logout")
         .then((response) => {
-          console.log(response);
+          // console.log(response);
           this.$store.dispatch("auth/logoutAuthUser");
         })
         .catch((err) => {});
@@ -40,6 +40,7 @@ header {
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  margin-bottom: 20px;
   // position: fixed;
   // top: 0;
   width: 100%;
