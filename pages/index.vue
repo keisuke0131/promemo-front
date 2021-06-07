@@ -5,12 +5,12 @@
       <Sidebar page="1" />
       <div class="main-contents">
         <div class="memo" v-for="(post, index) in Posts" :key="index">
-            <a :href="'post.url'" target="_blank" rel="noopener noreferrer">
+            <nuxt-link :to="'/posts/' + post.id +'/show'">
               <h3>{{ post.title }}</h3>
               <p>
                 {{ post.content }}
               </p>
-            </a>
+            </nuxt-link>
         </div>
       </div>
     </main>

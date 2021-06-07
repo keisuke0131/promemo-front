@@ -37,17 +37,6 @@ export default {
       activetab: this.page,
     };
   },
-  // mounted() {
-  //   axios
-  //     .get("http://localhost:8000/api")
-  //     .then((response) => {
-  //       this.data = response.data;
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //       this.data = "ERROR";
-  //     });
-  // },
   async asyncData({ $axios }) {
     // 取得先のURL
     const url = "http://localhost:8000/api";
