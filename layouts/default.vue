@@ -7,7 +7,6 @@
 
 <script>
 export default {
-
   beforeCreate() {
     // this.$store.dispatch("auth/loadStoredState");
     this.$store.dispatch("auth/loadUser");

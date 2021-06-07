@@ -8,12 +8,33 @@
     <nav>
       <ul>
         <li><a href="" class="btn register-btn">登録する</a></li>
-        <li v-if="$store.state.auth.isLoggedIn === true">
-          <button @click="logout" class="btn login-btn">ログアウト</button>
-        </li>
-        <li v-else>
-          <nuxt-link to="/auth/login" class="btn login-btn">ログイン</nuxt-link>
-        </li>
+        <template v-if="$store.state.auth.isLoggedIn === true">
+          <li>
+            <button @click="logout" class="btn login-btn">ログアウト</button>
+          </li>
+          <li><nuxt-link to="/posts/create">メモする</nuxt-link></li>
+          <li class="account-dropdown-list">
+            <span style="cursor: pointer" @click="isOpen = !isOpen"
+              >アカウント名</span
+            >
+            <div
+              class="dropdown-open-bg"
+              @click="isOpen = !isOpen"
+              v-if="isOpen"
+            ></div>
+            <div class="dropdown-list" v-if="isOpen">
+              <li>プロフィール</li>
+              <li>メモ執筆</li>
+            </div>
+          </li>
+        </template>
+        <template v-else>
+          <li>
+            <nuxt-link to="/auth/login" class="btn login-btn"
+              >ログイン</nuxt-link
+            >
+          </li>
+        </template>
       </ul>
     </nav>
   </header>
@@ -21,6 +42,11 @@
 
 <script>
 export default {
+  data() {
+    return {
+      isOpen: false,
+    };
+  },
   methods: {
     async logout() {
       this.$axios
@@ -48,6 +74,7 @@ header {
   box-shadow: 0 2px 2px rgba(0, 0, 0, 0.05);
   background: rgb(239, 251, 255);
   text-align: center;
+
   .header-logo {
     display: inline-block;
     // position: fixed;
@@ -55,15 +82,43 @@ header {
     transform: translateX(-50%);
     // -webkit-transform: translateX(-50%);Ï
     margin: auto;
+
     img {
       width: 150px;
     }
   }
+
   nav {
     ul {
       display: flex;
       li {
         margin: 0 20px 0 0;
+      }
+
+      .account-dropdown-list {
+        position: relative;
+      }
+
+      .dropdown-list {
+        position: absolute;
+        top: 40px;
+        right: 0;
+        text-align: left;
+        width: 150px;
+        padding: 10px;
+        border: 1px solid rgb(235, 235, 235);
+        background-color: white;
+        box-shadow: 2px 2px 5px 0px rgba(192, 192, 192, 0.281);
+        z-index: 9999;
+      }
+
+      .dropdown-open-bg {
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 9998;
       }
     }
   }
