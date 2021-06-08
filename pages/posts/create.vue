@@ -29,7 +29,9 @@
           </form>
         </div>
         <div v-html="compiledMarkdown"></div>
-        <button class="preview-icon">丸</button>
+        <button class="preview-icon">
+          <i class="fas fa-video"></i>
+        </button>
       </div>
     </main>
   </div>
@@ -92,8 +94,9 @@ export default {
     color: white;
     width: 50px;
     height: 50px;
-    background-color: rgb(196, 212, 255);
+    background-color: rgb(179, 199, 255);
     border-radius: 50%;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
   }
 }
 .post-form {
