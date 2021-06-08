@@ -75,7 +75,8 @@ export default {
           content: this.post.content,
         })
         .then((res) => {
-          console.log(res);
+          console.log(res.data.post.id);
+          this.$router.push({path:`/posts/${res.data.post.id}/edit`});
         })
         .catch((err) => {
           console.log(err);
