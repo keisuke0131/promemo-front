@@ -1,8 +1,6 @@
 <template>
   <div>
-    <Header />
     <main>
-      <Sidebar page="1" />
       <div class="main-contents">
         <div class="memo">
           <div class="memo-title">

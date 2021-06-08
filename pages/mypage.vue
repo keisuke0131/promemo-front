@@ -1,6 +1,5 @@
 <template>
 <div>
-  <Header />
   <main>
     <Sidebar page="2" />
     <div class="main-contents">
