@@ -87,9 +87,13 @@ export default {
   .preview-icon{
     position: absolute;
     top: 0;
-    right: 0px;
+    right: -50px;
     z-index: 9999px;
-    
+    color: white;
+    width: 50px;
+    height: 50px;
+    background-color: rgb(196, 212, 255);
+    border-radius: 50%;
   }
 }
 .post-form {
