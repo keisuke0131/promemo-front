@@ -1,27 +1,36 @@
 <template>
   <div>
+    <Header />
     <Nuxt />
   </div>
+
 </template>
 
 
 <script>
+import Header from "@/components/header.vue";
 export default {
   head() {
-      return {
-        link: [{
+    return {
+      link: [
+        {
           rel: "stylesheet",
           href: "https://pro.fontawesome.com/releases/v5.10.0/css/all.css",
-          integrity:"sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p",
-          crossorigin:"anonymous",
-        }]
-      }
+          integrity:
+            "sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p",
+          crossorigin: "anonymous",
+        },
+      ],
+    };
+  },
+  components: {
+    Header,
   },
   beforeCreate() {
     // this.$store.dispatch("auth/loadStoredState");
     this.$store.dispatch("auth/loadUser");
   },
-}
+};
 </script>
 
 <style>

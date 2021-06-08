@@ -1,6 +1,5 @@
 <template>
   <div>
-    <Header />
     <main>
       <div class="login-form-wrap">
         <form @submit.prevent="login">

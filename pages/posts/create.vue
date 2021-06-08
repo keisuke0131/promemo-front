@@ -1,6 +1,5 @@
 <template>
   <div>
-    <Header />
     <main>
       <div class="post-form-wrap">
         <div v-if="!isPreview" class="post-form">
