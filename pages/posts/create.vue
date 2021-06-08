@@ -34,11 +34,12 @@
 
         <button
           class="preview-icon"
+          :class="{ 'icon-active': isPreview }"
           @click="isPreviewUpdate"
           v-shortkey="['ctrl', 'z']"
           @shortkey="isPreviewUpdate"
         >
-          <i class="fas fa-video" :class="{ 'icon-active': isPreview }"></i>
+          <i class="fas fa-video"></i>
         </button>
       </div>
     </main>
@@ -108,11 +109,18 @@ export default {
     width: 50px;
     height: 50px;
     background-color: rgb(196, 215, 255);
+    text-align: center;
     border-radius: 50%;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.5),
+      0 1px 1px rgba(0, 0, 0, 0.19);
+    border-bottom: solid 2px #b5b5b5;
+    overflow: hidden;
 
-    .icon-active {
-      color: rgb(121, 163, 255);
+    &.icon-active {
+      color: rgb(128, 168, 255);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5),
+        0 2px 2px rgba(0, 0, 0, 0.19);
+      border-bottom: none;
     }
   }
 

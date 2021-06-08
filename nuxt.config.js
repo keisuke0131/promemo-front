@@ -31,7 +31,7 @@ export default {
   styleResources: {
     scss: [
       '@/assets/scss/_mixin.scss',
-      '@/assets/scss/_common.scss',
+      '@/assets/scss/_variable.scss',
     ]
   },
 
