@@ -2,22 +2,34 @@
   <div>
     <Header />
     <main>
-      <div class="post-form">
-        <form @submit.prevent="createPost">
-          <div class="form-group">
-            <input type="text" v-model="post.title" />
-          </div>
-          <div class="form-group">
-            <textarea
-              name=""
-              id=""
-              cols="30"
-              rows="10"
-              v-model="post.content"
-            ></textarea>
-          </div>
-          <button type="submit" v-shortkey.once="['ctrl','s']" @shortkey="createPost">送信</button>
-        </form>
+      <div class="post-form-wrap">
+        <div class="post-form">
+          <form @submit.prevent="createPost">
+            <div class="form-group">
+              <label for="">タイトル</label>
+              <input type="text" v-model="post.title" />
+            </div>
+            <div class="form-group">
+              <textarea
+                name=""
+                id=""
+                cols="30"
+                rows="10"
+                v-model="post.content"
+                @input="update"
+              ></textarea>
+            </div>
+            <button
+              type="submit"
+              v-shortkey.once="['ctrl', 's']"
+              @shortkey="createPost"
+            >
+              送信
+            </button>
+          </form>
+        </div>
+        <div v-html="compiledMarkdown"></div>
+        <button class="preview-icon">丸</button>
       </div>
     </main>
   </div>
@@ -35,8 +47,14 @@ export default {
         title: null,
         content: null,
       },
-      activetab: this.page,
     };
+  },
+  computed: {
+    compiledMarkdown() {
+      if (this.post.content) {
+        return this.$md.render(this.post.content);
+      }
+    },
   },
   methods: {
     createPost() {
@@ -52,16 +70,31 @@ export default {
           console.log(err);
         });
     },
+    update: function (e) {
+      this.input = e.target.value;
+    },
   },
 };
 </script>
 
 <style lang="scss" scoped>
+.post-form-wrap{
+  position: relative;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 0 20px;
+
+  .preview-icon{
+    position: absolute;
+    top: 0;
+    right: 0px;
+    z-index: 9999px;
+    
+  }
+}
 .post-form {
   box-shadow: 5px 5px 25px -10px rgba(0, 0, 0, 0.3);
   border-radius: 5px;
-  width: 480px;
-  margin: 0 auto;
   padding: 20px 15px;
   border: 1px solid rgb(243, 243, 243);
 
@@ -70,6 +103,9 @@ export default {
 
     label {
       display: block;
+      @include mq(sm){
+        color:red;
+      }
     }
 
     input {

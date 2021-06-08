@@ -12,7 +12,7 @@
           <li>
             <button @click="logout" class="btn login-btn">ログアウト</button>
           </li>
-          <li v-shortkey.once="['ctrl','e']" @shortkey="$router.push('/posts/create')"><nuxt-link to="/posts/create">メモする</nuxt-link></li>
+          <li v-shortkey.once="['ctrl','w']" @shortkey="$router.push('/posts/create')"><nuxt-link to="/posts/create">メモする</nuxt-link></li>
           <button type="button" class="btn btn-outline-primary"></button>
           <li class="account-dropdown-list">
             <span style="cursor: pointer" @click="isOpen = !isOpen"
