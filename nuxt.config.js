@@ -26,7 +26,13 @@ export default {
     '@nuxtjs/vuetify',
   ],
 
-  modules: ["@nuxtjs/axios", "@nuxtjs/dotenv","@nuxtjs/markdownit"],
+  modules: ["@nuxtjs/axios", '@nuxtjs/style-resources',"@nuxtjs/dotenv","@nuxtjs/markdownit"],
+
+  styleResources: {
+    scss: [
+      '@/assets/scss/_mixin.scss',
+    ]
+  },
 
   markdownit: {
     injected: true, // $mdを利用してmarkdownをhtmlにレンダリングする
