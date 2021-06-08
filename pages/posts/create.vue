@@ -3,7 +3,7 @@
     <Header />
     <main>
       <div class="post-form-wrap">
-        <div class="post-form">
+        <div v-if="!isPreview" class="post-form">
           <form @submit.prevent="createPost">
             <div class="form-group">
               <label for="">タイトル</label>
@@ -14,7 +14,7 @@
                 name=""
                 id=""
                 cols="30"
-                rows="10"
+                rows="15"
                 v-model="post.content"
                 @input="update"
               ></textarea>
@@ -28,9 +28,18 @@
             </button>
           </form>
         </div>
-        <div v-html="compiledMarkdown"></div>
-        <button class="preview-icon">
-          <i class="fas fa-video"></i>
+        <div v-else class="post-preview">
+          <h2>{{ post.title }}</h2>
+          <div v-html="compiledMarkdown"></div>
+        </div>
+
+        <button
+          class="preview-icon"
+          @click="isPreviewUpdate"
+          v-shortkey="['ctrl', 'z']"
+          @shortkey="isPreviewUpdate"
+        >
+          <i class="fas fa-video" :class="{ 'icon-active': isPreview }"></i>
         </button>
       </div>
     </main>
@@ -49,6 +58,7 @@ export default {
         title: null,
         content: null,
       },
+      isPreview: false,
     };
   },
   computed: {
@@ -75,18 +85,22 @@ export default {
     update: function (e) {
       this.input = e.target.value;
     },
+    isPreviewUpdate() {
+      console.log(this.isPreview);
+      this.isPreview = !this.isPreview;
+    },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-.post-form-wrap{
+.post-form-wrap {
   position: relative;
   max-width: 640px;
   margin: 0 auto;
   padding: 0 20px;
 
-  .preview-icon{
+  .preview-icon {
     position: absolute;
     top: 0;
     right: -50px;
@@ -94,9 +108,20 @@ export default {
     color: white;
     width: 50px;
     height: 50px;
-    background-color: rgb(179, 199, 255);
+    background-color: rgb(196, 215, 255);
     border-radius: 50%;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+
+    .icon-active {
+      color: rgb(121, 163, 255);
+    }
+  }
+
+  .post-preview {
+    box-shadow: 5px 5px 25px -10px rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+    padding: 20px 15px;
+    border: 1px solid rgb(243, 243, 243);
   }
 }
 .post-form {
@@ -110,8 +135,8 @@ export default {
 
     label {
       display: block;
-      @include mq(sm){
-        color:red;
+      @include mq(sm) {
+        color: red;
       }
     }
 
