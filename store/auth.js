@@ -33,6 +33,7 @@ export const actions = {
   async loadUser({ commit, dispatch }) {
       try {
         const user = (await this.$axios.get("/api/user")).data;
+        console.log(user);
         commit("setAuthUser", user);
         commit('setLoggedIn', true);
       } catch (error) {
@@ -44,7 +45,6 @@ export const actions = {
 
   async loginAuthUser({commit}){
     const user = (await this.$axios.get("/api/user")).data;
-        console.log(user)
         commit("setAuthUser", user);
         commit('setLoggedIn', true);
   },

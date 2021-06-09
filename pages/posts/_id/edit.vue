@@ -3,7 +3,7 @@
     <main>
       <div class="post-form-wrap">
         <div v-if="!isPreview" class="post-form">
-          <form @submit.prevent="createPost">
+          <form @submit.prevent="updatePost">
             <div class="form-group">
               <label for="">タイトル</label>
               <input type="text" v-model="post.title" />
@@ -21,9 +21,9 @@
             <button
               type="submit"
               v-shortkey.once="['ctrl', 's']"
-              @shortkey="createPost"
+              @shortkey="updatePost"
             >
-              送信
+              更新
             </button>
           </form>
         </div>
@@ -51,6 +51,12 @@ export default {
   props: {
     page: {},
   },
+  async asyncData({ $axios, params }) {
+    let { data } = await $axios.get(`/api/posts/${params.id}`);
+    return {
+      post: data.post,
+    };
+  },
   data() {
     return {
       post: {
@@ -68,15 +74,14 @@ export default {
     },
   },
   methods: {
-    createPost() {
+    updatePost() {
       this.$axios
-        .post("api/posts", {
+        .put(`api/posts/${this.$route.params.id}`, {
           title: this.post.title,
           content: this.post.content,
         })
         .then((res) => {
-          console.log(res.data.post.id);
-          this.$router.push({path:`/posts/${res.data.post.id}/edit`});
+          console.log(res.data);
         })
         .catch((err) => {
           console.log(err);
@@ -115,6 +120,12 @@ export default {
       0 1px 1px rgba(0, 0, 0, 0.19);
     border-bottom: solid 2px #b5b5b5;
     overflow: hidden;
+
+    @include mq(md) {
+      position: fixed;
+      top: 90% ;
+      right: 20px !important;
+    }
 
     &.icon-active {
       color: rgb(128, 168, 255);

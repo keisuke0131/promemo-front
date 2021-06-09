@@ -20,11 +20,11 @@
               アカウント名
             </span>
             <div
-              class="dropdown-open-bg"
+              class="DropdownOpenBg"
               @click="isOpen = !isOpen"
               v-if="isOpen"
             ></div>
-            <div class="dropdown-list" v-if="isOpen">
+            <div class="DropdownList" v-if="isOpen">
               <li><i class="fas fa-user-alt"></i> プロフィール</li>
               <li>
                 <button @click="logout">
@@ -108,33 +108,13 @@ header {
 
       li {
         margin: 0 10px;
-        &:last-child{
+        &:last-child {
           margin-right: 30px;
         }
       }
 
       .account-dropdown-list {
         position: relative;
-      }
-
-      .dropdown-list {
-        position: absolute;
-        top: 40px;
-        right: 0;
-        text-align: left;
-        width: 200px;
-        border: 1px solid rgb(235, 235, 235);
-        background-color: white;
-        box-shadow: 2px 2px 5px 0px rgba(192, 192, 192, 0.281);
-        z-index: 9999;
-        li {
-          padding: 10px;
-          color: $GRAY01;
-          margin: 0;
-          &:not(:last-child){
-            border-bottom: 1px solid $BORDER_GRAY01;
-          }
-        }
       }
 
       .dropdown-open-bg {
