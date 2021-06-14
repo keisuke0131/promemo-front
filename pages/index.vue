@@ -19,64 +19,10 @@ export default {
   comments:{
     MemoItem
   },
-  data() {
-    return {
-      dialogPost: {},
-      isShowDialog: false,
-      searchText: "",
-    };
-  },
   computed: {
     Posts() {
       return this.$store.getters["Posts/list"];
-    },
-    formTitle() {
-      return this.isPersistedPost ? "管理者編集" : "管理者追加";
-    },
-    headers() {
-      return [
-        { text: "ID", value: "id" },
-        { text: "投稿者", value: "user" },
-        { text: "名前", value: "title" },
-        { text: "コンテンツ", value: "content" },
-        { text: "", value: "edit-action" },
-        { text: "", value: "delete-action" },
-      ];
-    },
-    isPersistedPost() {
-      return !!this.dialogPost.id;
-    },
-  },
-  methods: {
-    closeDialog() {
-      this.isShowDialog = false;
-      setTimeout(() => {
-        this.dialogPost = {};
-      }, 1000);
-    },
-    isOpen() {
-      this.isOpenEllipsis = !this.isOpenEllipsis;
-    },
-    // //追加
-    // onClickAddBtn() {
-    //   this.dialogPost = {};
-    //   this.isShowDialog = true;
-    // },
-    // onClickEditIcon(Post) {
-    //   this.dialogPost = Object.assign({}, Post);
-    //   this.isShowDialog = true;
-    // },
-    // async onClickCreateBtn() {
-    //   await this.$store.dispatch("Posts/create", this.dialogPost);
-    //   this.closeDialog();
-    // },
-    // async onClickDeleteIcon(Post) {
-    //   await this.$store.dispatch("Posts/delete", Post);
-    // },
-    // async onClickUpdateBtn() {
-    //   await this.$store.dispatch("Posts/update", this.dialogPost);
-    //   this.closeDialog();
-    // },
+    }
   },
 };
 </script>
@@ -86,7 +32,7 @@ main {
   display: flex;
   justify-content: space-between;
   width: 1250px;
-  margin: 100px auto 0 auto;
+  margin: 50px auto 0 auto;
   .main-contents {
     display: flex;
     flex-wrap: wrap;
