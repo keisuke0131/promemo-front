@@ -1,6 +1,7 @@
 <template>
   <div>
     <main>
+      <Sidebar page="1" />
       <div class="main-contents">
         <div class="memo">
           <div class="memo-title">
@@ -38,21 +39,22 @@ main {
   display: flex;
   justify-content: space-between;
   width: 1250px;
-  margin: 100px auto 0 auto;
+  margin: 50px auto 0 auto;
   .main-contents {
     display: flex;
     flex-wrap: wrap;
     width: 1000px;
     .memo {
       width: 100%;
+      min-height: calc(100vh - 200px);
       margin: 0 15px 15px 0;
       padding: 20px;
       box-shadow: 0 2px 4px 0 rgba(155, 155, 155, 0.281);
       .memo-title {
         display: flex;
         justify-content: space-between;
-        align-items: flex-end;
-        margin: 0 0 5px 0;
+        align-items: center;
+        margin: 0 0 30px 0;
         h3 {
           font-size: 2em;
         }

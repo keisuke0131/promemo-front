@@ -23,7 +23,7 @@ main {
   display: flex;
   justify-content: space-between;
   width: 1250px;
-  margin: 100px auto 0 auto;
+  margin: 50px auto 0 auto;
   .main-contents {
     display: flex;
     flex-wrap: wrap;
