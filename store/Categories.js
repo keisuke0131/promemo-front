@@ -12,7 +12,9 @@ export const mutations = {
   setList (state, data) {
     state.Categories = data
   },
-  //追加
+  get (state, data) {
+    state.Categories = data
+  },
   create (state, data) {
     state.Categories.push(data)
   },

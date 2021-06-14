@@ -16,7 +16,9 @@
         <i class="fas fa-ellipsis-v" @click="isOpen"></i>
         <div class="DropdownOpenBg" @click="isOpen" v-if="isOpenEllipsis"></div>
         <div class="DropdownList" v-if="isOpenEllipsis">
-          <li @click="$router.push({path:`/posts/${post.id}/edit`})"><i class="fas fa-edit"></i> 編集</li>
+          <li @click="$router.push({ path: `/posts/${post.id}/edit` })">
+            <i class="fas fa-edit"></i> 編集
+          </li>
           <li @click="onClickDeleteIcon(post)">
             <i class="fas fa-trash-alt"></i> 削除
           </li>
@@ -26,6 +28,11 @@
     <p>
       {{ post.content }}
     </p>
+    <span class="category">
+      <nuxt-link :to="'/'">
+      {{ getCategory(post.category_id) }}
+      </nuxt-link>
+      </span>
   </div>
 </template>
 
@@ -33,6 +40,15 @@
 export default {
   props: {
     post: Object,
+  },
+    async fetch({ store }) {
+    const Categories = await store.dispatch("Categories/fetchList");
+    store.commit("Categories/setList", Categories);
+  },
+  computed: {
+    Categories() {
+      return this.$store.getters["Categories/list"];
+    }
   },
 
   data() {
@@ -48,6 +64,9 @@ export default {
     async onClickDeleteIcon(post) {
       await this.$store.dispatch("Posts/delete", post);
     },
+    getCategory(id){
+      return this.Categories[id].name;
+    }
   },
 };
 </script>
@@ -76,6 +95,14 @@ export default {
     h3 {
       margin-right: 10px;
     }
+  }
+  .category{
+    display: inline-block;
+    margin:10px 0 0 0;
+    padding:5px 10px;
+    box-shadow: 1px 1px #bbb;
+    background:#f8f8f8;
+    font-size:0.75em;
   }
 }
 </style>

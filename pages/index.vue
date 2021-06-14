@@ -10,19 +10,24 @@
 </template>
 
 <script>
-import MemoItem from '../components/MemoItem'
+import MemoItem from "../components/MemoItem";
 export default {
   async fetch({ store }) {
     const Posts = await store.dispatch("Posts/fetchList");
     store.commit("Posts/setList", Posts);
+    const Categories = await store.dispatch("Categories/fetchList");
+    store.commit("Categories/setList", Categories);
   },
-  comments:{
-    MemoItem
+  comments: {
+    MemoItem,
   },
   computed: {
     Posts() {
       return this.$store.getters["Posts/list"];
-    }
+    },
+    Categories() {
+      return this.$store.getters["Categories/list"];
+    },
   },
 };
 </script>
@@ -37,7 +42,6 @@ main {
     display: flex;
     flex-wrap: wrap;
     width: 1000px;
-  
   }
 }
 </style>
