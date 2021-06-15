@@ -5,9 +5,26 @@
         <div v-if="!isPreview" class="post-form">
           <form @submit.prevent="createPost">
             <div class="form-group">
-              <label for="">タイトル</label>
-              <input type="text" v-model="post.title" />
+              <label for="title">タイトル</label>
+              <input type="text" id="title" v-model="post.title" />
             </div>
+            <div class="form-group">
+              <label for="category">カテゴリー</label>
+              <Multiselect
+                id="category"
+                v-model="post.categories"
+                mode="tags"
+                :searchable="true"
+                noResultsText="一致する検索結果がありません。"
+                :createTag="false"
+                :options="categories"
+                :max="3"
+                valueProp="id"
+                trackBy="name"
+                label="name"
+              />
+            </div>
+
             <div class="form-group">
               <textarea
                 name=""
@@ -47,6 +64,8 @@
 </template>
 
 <script>
+import Multiselect from "../../node_modules/@vueform/multiselect/dist/multiselect.vue2.js";
+
 export default {
   props: {
     page: {},
@@ -56,9 +75,22 @@ export default {
       post: {
         title: null,
         content: null,
+        categories: [],
       },
+      categories: [],
       isPreview: false,
     };
+  },
+
+  async asyncData({ $axios }) {
+    let { data } = await $axios("/api/categories");
+    return {
+      categories: data,
+    };
+  },
+
+  components: {
+    Multiselect,
   },
   computed: {
     compiledMarkdown() {
@@ -73,10 +105,11 @@ export default {
         .post("api/posts", {
           title: this.post.title,
           content: this.post.content,
+          categories: this.post.categories,
         })
         .then((res) => {
           console.log(res.data.post.id);
-          this.$router.push({path:`/posts/${res.data.post.id}/edit`});
+          this.$router.push({ path: `/posts/${res.data.post.id}/edit` });
         })
         .catch((err) => {
           console.log(err);
@@ -92,6 +125,8 @@ export default {
   },
 };
 </script>
+
+<style src="@vueform/multiselect/themes/default.css"></style>
 
 <style lang="scss" scoped>
 .post-form-wrap {

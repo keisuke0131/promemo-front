@@ -30,7 +30,7 @@
     </p>
     <span class="category">
       <nuxt-link :to="'/'">
-      {{ getCategory(post.category_id) }}
+
       </nuxt-link>
       </span>
   </div>
@@ -42,12 +42,13 @@ export default {
     post: Object,
   },
     async fetch({ store }) {
+      console.log('聖億')
     const Categories = await store.dispatch("Categories/fetchList");
     store.commit("Categories/setList", Categories);
   },
   computed: {
     Categories() {
-      return this.$store.getters["Categories/list"];
+      // return this.$store.getters["Categories/list"];
     }
   },
 
