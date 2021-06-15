@@ -25,14 +25,9 @@
         </div>
       </div>
     </div>
-    <p>
-      {{ post.content }}
-    </p>
     <span class="category">
-      <nuxt-link :to="'/'">
-
-      </nuxt-link>
-      </span>
+      <nuxt-link :to="'/'"> </nuxt-link>
+    </span>
   </div>
 </template>
 
@@ -41,15 +36,15 @@ export default {
   props: {
     post: Object,
   },
-    async fetch({ store }) {
-      console.log('聖億')
+  async fetch({ store }) {
+    console.log("聖億");
     const Categories = await store.dispatch("Categories/fetchList");
     store.commit("Categories/setList", Categories);
   },
   computed: {
     Categories() {
       // return this.$store.getters["Categories/list"];
-    }
+    },
   },
 
   data() {
@@ -65,28 +60,31 @@ export default {
     async onClickDeleteIcon(post) {
       await this.$store.dispatch("Posts/delete", post);
     },
-    getCategory(id){
+    getCategory(id) {
       return this.Categories[id].name;
-    }
+    },
   },
 };
 </script>
 
 <style lang="scss" scoped>
 .memo {
+  position: relative;
   width: calc(25% - 11.25px);
   margin: 0 15px 15px 0;
   padding: 20px;
-  box-shadow: 0 2px 4px 0 rgba(155, 155, 155, 0.281);
+  box-shadow: 0 5px 10px -3px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgb(240, 240, 240);
   &:nth-of-type(4n) {
     margin: 0 0 15px 0;
   }
+
 
   .memo-title-wrap {
     position: relative;
     .fa-ellipsis-wrap {
       position: absolute;
-      top: 5px;
+      top: 0px;
       right: 5px;
       i {
         cursor: pointer;
@@ -94,16 +92,18 @@ export default {
     }
 
     h3 {
+      font-size: 16px;
       margin-right: 10px;
     }
   }
-  .category{
+
+  .category {
     display: inline-block;
-    margin:10px 0 0 0;
-    padding:5px 10px;
+    margin: 10px 0 0 0;
+    padding: 5px 10px;
     box-shadow: 1px 1px #bbb;
-    background:#f8f8f8;
-    font-size:0.75em;
+    background: #f8f8f8;
+    font-size: 0.75em;
   }
 }
 </style>
