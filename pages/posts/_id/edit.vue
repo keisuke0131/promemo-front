@@ -8,6 +8,24 @@
               <label for="">タイトル</label>
               <input type="text" v-model="post.title" />
             </div>
+
+            <div class="form-group">
+              <label for="category">カテゴリー</label>
+              <Multiselect
+                id="category"
+                v-model="post.categories"
+                mode="tags"
+                :searchable="true"
+                noResultsText="一致する検索結果がありません。"
+                :createTag="false"
+                :options="categories"
+                :max="3"
+                valueProp="id"
+                trackBy="name"
+                label="name"
+              />
+            </div>
+
             <div class="form-group">
               <textarea
                 name=""
@@ -47,22 +65,37 @@
 </template>
 
 <script>
+import Multiselect from "../../../node_modules/@vueform/multiselect/dist/multiselect.vue2.js";
 export default {
   props: {
     page: {},
   },
   async asyncData({ $axios, params }) {
-    let { data } = await $axios.get(`/api/posts/${params.id}`);
+    let { data } = await $axios.get(`/api/posts/${params.id}/edit`);
+    let category = await $axios.get("/api/categories");
     return {
       post: data.post,
+      post: {
+        categories: data.categories,
+      },
+      categories: category.data,
     };
+  },
+  components: {
+    Multiselect,
   },
   data() {
     return {
       post: {
         title: null,
         content: null,
+        categories: [
+          {
+            id: null,
+          },
+        ],
       },
+      categories: [],
       isPreview: false,
     };
   },
@@ -98,6 +131,8 @@ export default {
 };
 </script>
 
+<style src="@vueform/multiselect/themes/default.css"></style>
+
 <style lang="scss" scoped>
 .post-form-wrap {
   position: relative;
@@ -123,7 +158,7 @@ export default {
 
     @include mq(md) {
       position: fixed;
-      top: 90% ;
+      top: 90%;
       right: 20px !important;
     }
 

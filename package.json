@@ -13,6 +13,7 @@
     "@nuxtjs/dotenv": "^1.4.1",
     "@nuxtjs/markdownit": "^2.0.0",
     "@nuxtjs/vuetify": "^1.11.3",
+    "@vueform/multiselect": "^1.5.0",
     "core-js": "^3.9.1",
     "hard-source-webpack-plugin": "^0.13.1",
     "nuxt": "^2.15.3",

@@ -24,9 +24,10 @@ export default {
 
   buildModules: [
     '@nuxtjs/vuetify',
+    '@nuxtjs/composition-api/module'
   ],
 
-  modules: ["@nuxtjs/axios", '@nuxtjs/style-resources',"@nuxtjs/dotenv","@nuxtjs/markdownit"],
+  modules: ["@nuxtjs/axios",'@nuxtjs/style-resources',"@nuxtjs/dotenv","@nuxtjs/markdownit"],
 
   styleResources: {
     scss: [
