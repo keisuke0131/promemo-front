@@ -2,22 +2,22 @@
   <div>
     <main>
       <div class="post-form-wrap">
-        <h1>新規会員登録</h1>
         <div v-if="!isPreview" class="post-form">
           <form @submit.prevent="createPost">
+            <h1>Sign Up</h1>
             <div class="form-group">
-              <label for="">name</label>
-              <input type="text" v-model="post.title" />
+              <input type="text" placeholder="name" />
             </div>
             <div class="form-group">
-              <label for="">email</label>
-              <input type="text" v-model="post.title" />
+              <input type="text" placeholder="email" />
             </div>
             <div class="form-group">
-              <label for="">password</label>
-              <input type="text" v-model="post.title" />
+              <input type="password" placeholder="password" />
             </div>
-            <button type="submit">送信</button>
+            <div class="form-group">
+              <input type="password" placeholder="password_confirm" />
+            </div>
+            <button type="submit">Sign Up</button>
           </form>
         </div>
         <div v-else class="post-preview">
@@ -59,7 +59,7 @@ export default {
         })
         .then((res) => {
           console.log(res.data.post.id);
-          this.$router.push({path:`/posts/${res.data.post.id}/edit`});
+          this.$router.push({ path: `/posts/${res.data.post.id}/edit` });
         })
         .catch((err) => {
           console.log(err);
@@ -78,11 +78,13 @@ export default {
 
 <style lang="scss" scoped>
 .post-form-wrap {
-  position: relative;
   max-width: 640px;
   margin: 0 auto;
   padding: 0 20px;
-
+  h1 {
+    font-size: 1.75em;
+    margin: 0 0 25px 0;
+  }
   .preview-icon {
     position: absolute;
     top: 0;
@@ -115,11 +117,12 @@ export default {
   }
 }
 .post-form {
+  width: 100%;
   box-shadow: 5px 5px 25px -10px rgba(0, 0, 0, 0.3);
   border-radius: 5px;
-  padding: 20px 15px;
+  margin: 50px 0 0 0;
+  padding: 50px;
   border: 1px solid rgb(243, 243, 243);
-
   .form-group {
     margin: 10px 0;
 
@@ -134,8 +137,8 @@ export default {
       border: 1px solid rgb(218, 218, 218);
       display: block;
       width: 100%;
-      padding: 3px 5px;
-
+      margin: 15px 0 0 0;
+      padding: 7px;
       &:focus {
         outline: none;
       }
@@ -153,11 +156,12 @@ export default {
     }
   }
   button {
+    margin: 10px 0 0 0;
+    padding: 10px 30px;
+    border-radius: 3px;
+    background: #88b7fa;
     color: white;
     font-weight: bold;
-    background-color: rgb(184, 214, 255);
-    border-radius: 3px;
-    padding: 0 10px;
   }
 }
 </style>
