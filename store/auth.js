@@ -1,7 +1,7 @@
 export const state = () => ({
   // 認証中の一般ユーザー
   auth_user: null,
-  isLoggedIn:false,
+  isLoggedIn: false,
   // 認証中の管理者ユーザー
   admin_user: null
 })
@@ -17,6 +17,15 @@ export const mutations = {
   // 認証中の管理者ユーザー
   setAdminUser(state, admin_user) {
     state.admin_user = admin_user
+  },
+
+  setEmail(state, payload) {
+    state.auth_user.email = payload;
+  },
+
+  setName(state, payload) {
+    state.auth_user.name = payload;
+    console.log("setName", payload);
   }
 }
 
@@ -31,25 +40,24 @@ export const actions = {
   },
 
   async loadUser({ commit, dispatch }) {
-      try {
-        const user = (await this.$axios.get("/api/user")).data;
-        console.log(user);
-        commit("setAuthUser", user);
-        commit('setLoggedIn', true);
-      } catch (error) {
-        commit('setLoggedIn', false);
-        commit("setAuthUser", '');
-        console.log(error)
-      }
+    try {
+      const user = (await this.$axios.get("/api/user")).data;
+      commit("setAuthUser", user);
+      commit('setLoggedIn', true);
+    } catch (error) {
+      commit('setLoggedIn', false);
+      commit("setAuthUser", '');
+      console.log('/api/userへのアクセスエラー', error)
+    }
   },
 
-  async loginAuthUser({commit}){
+  async loginAuthUser({ commit }) {
     const user = (await this.$axios.get("/api/user")).data;
-        commit("setAuthUser", user);
-        commit('setLoggedIn', true);
+    commit("setAuthUser", user);
+    commit('setLoggedIn', true);
   },
   logoutAuthUser({ commit }) {
-    commit('setAuthUser','');
+    commit('setAuthUser', '');
     commit('setLoggedIn', false);
     logOut();
   }

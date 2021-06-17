@@ -85,29 +85,6 @@ export default {
     font-size: 1.75em;
     margin: 0 0 25px 0;
   }
-  .preview-icon {
-    position: absolute;
-    top: 0;
-    right: -50px;
-    z-index: 9999px;
-    color: white;
-    width: 50px;
-    height: 50px;
-    background-color: rgb(196, 215, 255);
-    text-align: center;
-    border-radius: 50%;
-    box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.5),
-      0 1px 1px rgba(0, 0, 0, 0.19);
-    border-bottom: solid 2px #b5b5b5;
-    overflow: hidden;
-
-    &.icon-active {
-      color: rgb(128, 168, 255);
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5),
-        0 2px 2px rgba(0, 0, 0, 0.19);
-      border-bottom: none;
-    }
-  }
 
   .post-preview {
     box-shadow: 5px 5px 25px -10px rgba(0, 0, 0, 0.3);
