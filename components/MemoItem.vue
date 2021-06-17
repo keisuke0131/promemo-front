@@ -25,9 +25,11 @@
         </div>
       </div>
     </div>
-    <span class="category">
-      <nuxt-link :to="'/'"> </nuxt-link>
-    </span>
+    <div v-for="category in post.categories" :key="category.id" :category="category">
+      <span class="category">
+        <nuxt-link :to="'/'">{{ category.name }}</nuxt-link>
+      </span>
+    </div>
   </div>
 </template>
 
@@ -37,7 +39,6 @@ export default {
     post: Object,
   },
   async fetch({ store }) {
-    console.log("聖億");
     const Categories = await store.dispatch("Categories/fetchList");
     store.commit("Categories/setList", Categories);
   },
@@ -78,7 +79,6 @@ export default {
   &:nth-of-type(4n) {
     margin: 0 0 15px 0;
   }
-
 
   .memo-title-wrap {
     position: relative;
