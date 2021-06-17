@@ -13,7 +13,7 @@
               <label for="category">カテゴリー</label>
               <Multiselect
                 id="category"
-                v-model="post.categories"
+                v-model="postCategories"
                 mode="tags"
                 :searchable="true"
                 noResultsText="一致する検索結果がありません。"
@@ -25,6 +25,8 @@
                 label="name"
               />
             </div>
+
+            {{ post }}
 
             <div class="form-group">
               <textarea
@@ -75,9 +77,7 @@ export default {
     let category = await $axios.get("/api/categories");
     return {
       post: data.post,
-      post: {
-        categories: data.categories,
-      },
+      postCategories: data.categories,
       categories: category.data,
     };
   },
@@ -112,6 +112,7 @@ export default {
         .put(`api/posts/${this.$route.params.id}`, {
           title: this.post.title,
           content: this.post.content,
+          categories: this.postCategories,
         })
         .then((res) => {
           console.log(res.data);
