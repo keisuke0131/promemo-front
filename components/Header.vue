@@ -16,16 +16,18 @@
             </nuxt-link>
           </li>
           <li class="account-dropdown-list">
-            <span style="cursor: pointer" @click="isOpen = !isOpen">
-              アカウント名
+            <span style="cursor: pointer" @click="onOpen">
+              {{ $store.state.auth.auth_user.name }}
             </span>
-            <div
-              class="DropdownOpenBg"
-              @click="isOpen = !isOpen"
-              v-if="isOpen"
-            ></div>
+            <div class="DropdownOpenBg" @click="onOpen" v-if="isOpen"></div>
             <div class="DropdownList" v-if="isOpen">
-              <li><i class="fas fa-user-alt"></i> プロフィール</li>
+              <li @click="onOpen">
+                <i class="fas fa-user-alt"></i>
+                <nuxt-link
+                  :to="'/users/' + $store.state.auth.auth_user.id + '/profile'"
+                  >プロフィール</nuxt-link
+                >
+              </li>
               <li>
                 <button @click="logout">
                   <i class="fas fa-sign-out-alt"></i> ログアウト
@@ -64,8 +66,8 @@ export default {
         })
         .catch((err) => {});
     },
-    console() {
-      console.log("成功");
+    onOpen() {
+      this.isOpen = !this.isOpen;
     },
   },
 };
@@ -88,12 +90,6 @@ header {
 
   .header-logo {
     margin-left: 20px;
-    // display: inline-block;
-    // position: fixed;
-    // left: 50%;
-    // transform: translateX(-50%);
-    // -webkit-transform: translateX(-50%);Ï
-    // margin: auto;
 
     img {
       width: 150px;

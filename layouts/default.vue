@@ -3,7 +3,6 @@
     <Header />
     <Nuxt />
   </div>
-
 </template>
 
 
@@ -25,10 +24,6 @@ export default {
   },
   components: {
     Header,
-  },
-  beforeCreate() {
-    // this.$store.dispatch("auth/loadStoredState");
-    this.$store.dispatch("auth/loadUser");
   },
 };
 </script>
