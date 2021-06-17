@@ -18,7 +18,11 @@ export default {
 
   css: ["@/assets/style/style.css"],
 
-  plugins: ["~/plugins/axios","~/plugins/vue-shortkey.client.js"],
+  plugins: [
+    "~/plugins/axios",
+    "~/plugins/vue-shortkey.client.js",
+    "~/plugins/loadUser.js",
+  ],
 
   components: true,
 
@@ -27,7 +31,7 @@ export default {
     '@nuxtjs/composition-api/module'
   ],
 
-  modules: ["@nuxtjs/axios",'@nuxtjs/style-resources',"@nuxtjs/dotenv","@nuxtjs/markdownit"],
+  modules: ["@nuxtjs/axios", '@nuxtjs/style-resources', "@nuxtjs/dotenv", "@nuxtjs/markdownit"],
 
   styleResources: {
     scss: [
