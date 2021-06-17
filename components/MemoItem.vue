@@ -38,15 +38,6 @@ export default {
   props: {
     post: Object,
   },
-  async fetch({ store }) {
-    const Categories = await store.dispatch("Categories/fetchList");
-    store.commit("Categories/setList", Categories);
-  },
-  computed: {
-    Categories() {
-      // return this.$store.getters["Categories/list"];
-    },
-  },
 
   data() {
     return {
