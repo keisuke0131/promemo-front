@@ -20,7 +20,7 @@
 <script>
 export default {
   async asyncData({ $axios,params }) {
-    let { data } = await $axios.get(`/api/posts/${params.id}`);
+    const { data } = await $axios.get(`/api/posts/${params.id}`);
     return {
       post: data.post,
     };
