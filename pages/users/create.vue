@@ -3,26 +3,45 @@
     <main>
       <div class="post-form-wrap">
         <div v-if="!isPreview" class="post-form">
-          <form @submit.prevent="createPost">
+          <form @submit.prevent="createUserLogin">
             <h1>Sign Up</h1>
-            <div class="form-group">
-              <input type="text" placeholder="name" />
-            </div>
-            <div class="form-group">
-              <input type="text" placeholder="email" />
-            </div>
-            <div class="form-group">
-              <input type="password" placeholder="password" />
-            </div>
-            <div class="form-group">
-              <input type="password" placeholder="password_confirm" />
-            </div>
-            <button type="submit">Sign Up</button>
+            <ValidationObserver ref="myform">
+              <validation-provider v-slot="{ errors }" rules="required">
+                <div class="row">
+                  <span class="error">{{ errors[0] }}</span>
+                  <input
+                    v-model="user.name"
+                    name="name"
+                    type="text"
+                    placeholder="お名前"
+                  />
+                </div>
+              </validation-provider>
+              <validation-provider v-slot="{ errors }" rules="email|required">
+                <div class="row">
+                  <span class="error">{{ errors[0] }}</span>
+                  <input
+                    v-model="user.email"
+                    name="email"
+                    type="text"
+                    placeholder="メールアドレス"
+                  />
+                </div>
+              </validation-provider>
+              <validation-provider v-slot="{ errors }" rules="min:6|required">
+                <div class="row">
+                  <span class="error">{{ errors[0] }}</span>
+                  <input
+                    v-model="user.password"
+                    name="password"
+                    type="password"
+                    placeholder="パスワード"
+                  />
+                </div>
+              </validation-provider>
+            </ValidationObserver>
+            <button type="submit">送信</button>
           </form>
-        </div>
-        <div v-else class="post-preview">
-          <h2>{{ post.title }}</h2>
-          <div v-html="compiledMarkdown"></div>
         </div>
       </div>
     </main>
@@ -31,46 +50,44 @@
 
 <script>
 export default {
-  props: {
-    page: {},
-  },
   data() {
     return {
-      post: {
-        title: null,
-        content: null,
+      user: {
+        name: "",
+        email: "",
+        password: "",
       },
-      isPreview: false,
     };
   },
-  computed: {
-    compiledMarkdown() {
-      if (this.post.content) {
-        return this.$md.render(this.post.content);
-      }
-    },
-  },
   methods: {
-    createPost() {
-      this.$axios
-        .post("api/posts", {
-          title: this.post.title,
-          content: this.post.content,
-        })
-        .then((res) => {
-          console.log(res.data.post.id);
-          this.$router.push({ path: `/posts/${res.data.post.id}/edit` });
+    async createUserLogin() {
+      const login_user = {
+        email: this.user.email,
+        password: this.user.password
+      };
+      await this.$axios
+        .post("api/users", this.user)
+        .then(async () => {
+          await this.$axios.get("/sanctum/csrf-cookie").then((response) => {
+            console.log(response);
+            this.$axios
+              .post("/login", login_user)
+              .then((res) => {
+                this.$store.dispatch("auth/loginAuthUser");
+                console.log(res.data);
+                this.$router.push("/");
+              })
+              .catch((err) => {
+                console.log(err.response.data);
+              });
+          });
         })
         .catch((err) => {
-          console.log(err);
+          console.log(err.response.data);
         });
     },
     update: function (e) {
       this.input = e.target.value;
-    },
-    isPreviewUpdate() {
-      console.log(this.isPreview);
-      this.isPreview = !this.isPreview;
     },
   },
 };
@@ -84,6 +101,29 @@ export default {
   h1 {
     font-size: 1.75em;
     margin: 0 0 25px 0;
+  }
+  .preview-icon {
+    position: absolute;
+    top: 0;
+    right: -50px;
+    z-index: 9999px;
+    color: white;
+    width: 50px;
+    height: 50px;
+    background-color: rgb(196, 215, 255);
+    text-align: center;
+    border-radius: 50%;
+    box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.5),
+      0 1px 1px rgba(0, 0, 0, 0.19);
+    border-bottom: solid 2px #b5b5b5;
+    overflow: hidden;
+
+    &.icon-active {
+      color: rgb(128, 168, 255);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5),
+        0 2px 2px rgba(0, 0, 0, 0.19);
+      border-bottom: none;
+    }
   }
 
   .post-preview {
@@ -139,6 +179,21 @@ export default {
     background: #88b7fa;
     color: white;
     font-weight: bold;
+  }
+}
+
+.row {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  input {
+    margin: 10px 0 30px 0;
+    padding: 5px;
+    border: 1px solid rgb(173, 173, 173);
+    font-size: 1.25em;
+  }
+  .error {
+    color: #db0000;
   }
 }
 </style>

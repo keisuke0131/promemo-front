@@ -22,6 +22,7 @@ export default {
     "~/plugins/axios",
     "~/plugins/vue-shortkey.client.js",
     "~/plugins/loadUser.js",
+    "~/plugins/vee-validate.js",
   ],
 
   components: true,
@@ -62,6 +63,7 @@ export default {
       presets({ isServer }, [preset, options]) {
         options.loose = true;
       }
-    }
+    },
+    transpile: ["vee-validate/dist/rules"]
   }
 };
