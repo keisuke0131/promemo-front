@@ -1,18 +1,18 @@
 <template>
   <div class="memo">
-    <div
-      class="memo-title-wrap"
-      v-if="
-        $store.state.auth.auth_user &&
-        $store.state.auth.auth_user.id === post.user_id
-      "
-    >
+    <div class="memo-title-wrap">
       <h3>
         <nuxt-link :to="'/posts/' + post.id + '/show'">{{
           post.title
         }}</nuxt-link>
       </h3>
-      <div class="fa-ellipsis-wrap">
+      <div
+        v-if="
+          $store.state.auth.auth_user &&
+          $store.state.auth.auth_user.id === post.user_id
+        "
+        class="fa-ellipsis-wrap"
+      >
         <i class="fas fa-ellipsis-v" @click="isOpen"></i>
         <div class="DropdownOpenBg" @click="isOpen" v-if="isOpenEllipsis"></div>
         <div class="DropdownList" v-if="isOpenEllipsis">
@@ -25,9 +25,9 @@
         </div>
       </div>
     </div>
-    <div v-for="category in post.categories" :key="category.id" :category="category">
+    <div>
       <span class="category">
-        <nuxt-link :to="'/'">{{ category.name }}</nuxt-link>
+        <nuxt-link :to="'/'">{{ post.category.name }}</nuxt-link>
       </span>
     </div>
   </div>
@@ -51,9 +51,6 @@ export default {
     },
     async onClickDeleteIcon(post) {
       await this.$store.dispatch("Posts/delete", post);
-    },
-    getCategory(id) {
-      return this.Categories[id].name;
     },
   },
 };
