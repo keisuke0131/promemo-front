@@ -1,6 +1,6 @@
 <template>
   <div>
-    <main>
+    <main class="two-columns-main">
       <Sidebar page="2" />
       <div class="main-contents">
         <div>
@@ -91,18 +91,19 @@ export default {
 
 <style lang="scss" scoped>
 main {
-  display: flex;
-  justify-content: space-between;
-  width: 1250px;
-  margin: 50px auto 0 auto;
   .main-contents {
-    width: 1000px;
+    display: flex;
+    flex-wrap: wrap;
   }
 
   .category-wrap {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
+
+    @include mq(lg) {
+      justify-content: center;
+    }
   }
 
   .category {
@@ -112,6 +113,14 @@ main {
     padding: 20px;
     box-shadow: 0 5px 10px -3px rgba(0, 0, 0, 0.3);
     border: 1px solid $BORDER_GRAY01;
+
+    @include mq(lg) {
+      width: 45%;
+    }
+
+    @include mq(md) {
+      width: 100%;
+    }
 
     h3 {
       margin-bottom: 20px;

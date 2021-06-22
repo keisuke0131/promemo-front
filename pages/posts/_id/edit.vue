@@ -26,12 +26,11 @@
               />
             </div>
 
-            {{ post }}
-
             <div class="form-group">
+              <label for="content">本文</label>
               <textarea
                 name=""
-                id=""
+                id="content"
                 cols="30"
                 rows="15"
                 v-model="post.content"
@@ -42,6 +41,7 @@
               type="submit"
               v-shortkey.once="['ctrl', 's']"
               @shortkey="updatePost"
+              class="BlueAnimButton"
             >
               更新
             </button>
@@ -189,39 +189,44 @@ export default {
 
     label {
       display: block;
-      @include mq(sm) {
-        color: red;
-      }
+      font-weight: bold;
+      font-size: 16px;
+      color: $GRAY01;
     }
 
     input {
-      border: 1px solid rgb(218, 218, 218);
+      border: 1px solid $BORDER_GRAY01;
       display: block;
       width: 100%;
-      padding: 3px 5px;
+      padding: 8px 8px;
+      border-radius: 5px;
+      color: $INPUT_GRAY_COlOR;
 
       &:focus {
         outline: none;
+        border: 1px solid $BORDER_FOCUS_BLUE;
       }
     }
 
     textarea {
-      border: 1px solid rgb(218, 218, 218);
+      border: 1px solid $BORDER_GRAY01;
       display: block;
+      color: $INPUT_GRAY_COlOR;
+      border-radius: 5px;
       width: 100%;
-      padding: 3px 5px;
+      padding: 10px 8px;
 
       &:focus {
         outline: none;
+        border: 1px solid $BORDER_FOCUS_BLUE;
       }
     }
   }
   button {
     color: white;
     font-weight: bold;
-    background-color: rgb(184, 214, 255);
     border-radius: 3px;
-    padding: 0 10px;
+    padding: 5px 40px;
   }
 }
 </style>

@@ -1,39 +1,68 @@
 $GRAY01: rgb(143, 143, 143);
 
 $BORDER_GRAY01: rgb(231, 231, 231);
-$BUTTON_BORDER_GRAY01:rgb(167, 167, 167);
+$BUTTON_BORDER_GRAY01: rgb(167, 167, 167);
 
-$BLUE : #7bb0fd;
+$BLUE: #7bb0fd;
+$BORDER_FOCUS_BLUE: #b5d2ff;
+
+$INPUT_GRAY_COlOR: rgb(85, 85, 85);
 
 .MaxWidth640 {
   max-width: 640px;
 }
 
+.BlueAnimButton {
+  background-color: #5699ff;
+  border-radius: 3px;
+  padding: 5px 10px;
+  transition: 0.3s;
+  &:hover {
+    background-color: #88b7ff;
+  }
+}
+
 .DropdownOpenBg {
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 9998;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9998;
+}
+
+.DropdownList {
+  position: absolute;
+  top: 40px;
+  right: 0;
+  text-align: left;
+  width: 200px;
+  border: 1px solid rgb(235, 235, 235);
+  background-color: white;
+  box-shadow: 2px 2px 5px 0px rgba(192, 192, 192, 0.281);
+  z-index: 9999;
+  li {
+    padding: 10px;
+    color: $GRAY01;
+    cursor: pointer;
+    margin: 0;
+    &:not(:last-child) {
+      border-bottom: 1px solid $BORDER_GRAY01;
+    }
+  }
+}
+
+.two-columns-main {
+  display: flex;
+  justify-content: space-around;
+  margin: 50px auto 0 auto;
+  padding: 0 50px;
+
+  @include mq(lg) {
+    display: block;
   }
 
-  .DropdownList {
-    position: absolute;
-    top: 40px;
-    right: 0;
-    text-align: left;
-    width: 200px;
-    border: 1px solid rgb(235, 235, 235);
-    background-color: white;
-    box-shadow: 2px 2px 5px 0px rgba(192, 192, 192, 0.281);
-    z-index: 9999;
-    li {
-      padding: 10px;
-      color: $GRAY01;
-      cursor: pointer;
-      margin: 0;
-      &:not(:last-child) {
-        border-bottom: 1px solid $BORDER_GRAY01;
-      }
-    }}
+  @include mq(md) {
+    padding: 0px 20px;
+  }
+}

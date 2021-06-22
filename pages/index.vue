@@ -1,6 +1,6 @@
 <template>
   <div>
-    <main>
+    <main class="two-columns-main">
       <Sidebar page="1" />
       <div class="main-contents">
         <MemoItem v-for="post in Posts" :key="post.id" :post="post"></MemoItem>
@@ -29,14 +29,9 @@ export default {
 
 <style lang="scss" scoped>
 main {
-  display: flex;
-  justify-content: space-between;
-  width: 1250px;
-  margin: 50px auto 0 auto;
   .main-contents {
     display: flex;
     flex-wrap: wrap;
-    width: 1000px;
   }
 }
 </style>
