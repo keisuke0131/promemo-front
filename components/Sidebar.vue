@@ -17,14 +17,14 @@
         v-on:click="activetab = '3'"
         v-bind:class="[activetab === '3' ? 'active' : '']"
       >
-        <nuxt-link to="/good">{{ data }}</nuxt-link>
+        <nuxt-link to="/good">保存した</nuxt-link>
       </li>
     </ul>
   </aside>
 </template>
 
 <script>
-import axios from 'axios'
+import axios from "axios";
 export default {
   props: {
     page: {
@@ -52,19 +52,40 @@ export default {
 
 <style lang="scss" scoped>
 aside {
-  width: 200px;
+  width: 250px;
+  @include mq(lg) {
+    width: 100%;
+  }
   ul {
+    font-size: 16px;
+    margin-bottom: 50px;
+    @include mq(lg) {
+      display: flex;
+      font-size: 14px;
+    }
     li {
       line-height: 2em;
-      font-size: 1.25em;
+
+      @include mq(lg) {
+        width: 25%;
+      }
+
       a {
-        color: #222;
+        color: $GRAY01;
+        @include mq(lg) {
+          padding: 30px 10px;
+          border-radius: 10px;
+        }
       }
     }
     .active {
       font-weight: bold;
       a {
-        color: #007bff;
+        color: $BLUE;
+        @include mq(lg) {
+          background-color: $BLUE;
+          color: white;
+        }
       }
     }
   }

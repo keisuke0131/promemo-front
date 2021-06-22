@@ -20,20 +20,24 @@
               {{ $store.state.auth.auth_user.name }}
             </span>
             <div class="DropdownOpenBg" @click="onOpen" v-if="isOpen"></div>
-            <div class="DropdownList" v-if="isOpen">
-              <li @click="onOpen">
-                <i class="fas fa-user-alt"></i>
-                <nuxt-link
-                  :to="'/users/' + $store.state.auth.auth_user.id + '/profile'"
-                  >プロフィール</nuxt-link
-                >
-              </li>
-              <li>
-                <button @click="logout">
-                  <i class="fas fa-sign-out-alt"></i> ログアウト
-                </button>
-              </li>
-            </div>
+            <transition>
+              <div class="DropdownList" v-if="isOpen">
+                <li @click="onOpen">
+                  <i class="fas fa-user-alt"></i>
+                  <nuxt-link
+                    :to="
+                      '/users/' + $store.state.auth.auth_user.id + '/profile'
+                    "
+                    >プロフィール</nuxt-link
+                  >
+                </li>
+                <li>
+                  <button @click="logout">
+                    <i class="fas fa-sign-out-alt"></i> ログアウト
+                  </button>
+                </li>
+              </div>
+            </transition>
           </li>
         </template>
         <template v-else>
@@ -74,6 +78,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.v-leave-active,
+.v-enter-active {
+  transition: opacity 0.2s;
+}
+
+/* 表示アニメーション */
+.v-enter,
+.v-leave-to {
+  opacity: 0;
+}
+
 header {
   display: flex;
   justify-content: flex;
@@ -137,9 +152,13 @@ header {
   }
 
   .create-memo-btn {
-    background-color: #7cb0fd;
+    background-color: #5699ff;
     border-radius: 3px;
     padding: 5px 10px;
+    transition: 0.3s;
+    &:hover {
+      background-color: #88b7ff;
+    }
     span {
       color: white;
     }
