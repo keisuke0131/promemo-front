@@ -33,8 +33,17 @@
         </div>
       </div>
       <div>
-        <span class="category" :class="log('php')">
-          <nuxt-link :to="'/'">{{ post.category.name }}</nuxt-link>
+        <span>
+          <nuxt-link
+            class="category"
+            :class="
+              post.category.category_color[0]
+                ? post.category.category_color[0].color_name
+                : post.category.default_color_name
+            "
+            :to="'/'"
+            >{{ post.category.name }}</nuxt-link
+          >
         </span>
       </div>
     </div>
@@ -127,7 +136,6 @@ export default {
       margin: 10px 0 0 0;
       padding: 5px 10px;
       box-shadow: 1px 1px #bbb;
-      background: #f8f8f8;
       font-size: 0.75em;
     }
   }

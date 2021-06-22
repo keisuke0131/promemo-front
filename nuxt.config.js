@@ -38,6 +38,7 @@ export default {
     scss: [
       '@/assets/scss/_mixin.scss',
       '@/assets/scss/_variable.scss',
+      '@/assets/scss/_color.scss',
     ]
   },
 

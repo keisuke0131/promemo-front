@@ -10,6 +10,7 @@ $INPUT_GRAY_COlOR: rgb(85, 85, 85);
 
 .MaxWidth640 {
   max-width: 640px;
+  margin: 0 auto;
 }
 
 .BlueAnimButton {
@@ -44,10 +45,17 @@ $INPUT_GRAY_COlOR: rgb(85, 85, 85);
   li {
     padding: 10px;
     color: $GRAY01;
-    cursor: pointer;
+    align-items: center;
     margin: 0;
+    display: flex;
     &:not(:last-child) {
       border-bottom: 1px solid $BORDER_GRAY01;
+    }
+
+    a {
+      width: 100%;
+      padding-left: 5px;
+      display: block;
     }
   }
 }
