@@ -25,13 +25,9 @@
         </div>
       </div>
     </div>
-    <div
-      v-for="category in post.categories"
-      :key="category.id"
-      :category="category"
-    >
+    <div>
       <span class="category">
-        <nuxt-link :to="'/'">{{ category.name }}</nuxt-link>
+        <nuxt-link :to="'/'">{{ post.category.name }}</nuxt-link>
       </span>
     </div>
   </div>
@@ -55,9 +51,6 @@ export default {
     },
     async onClickDeleteIcon(post) {
       await this.$store.dispatch("Posts/delete", post);
-    },
-    getCategory(id) {
-      return this.Categories[id].name;
     },
   },
 };

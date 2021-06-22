@@ -13,13 +13,13 @@
               <label for="category">カテゴリー</label>
               <Multiselect
                 id="category"
-                v-model="postCategories"
+                v-model="postCategory"
                 mode="tags"
                 :searchable="true"
                 noResultsText="一致する検索結果がありません。"
                 :createTag="false"
                 :options="categories"
-                :max="3"
+                :max="1"
                 valueProp="id"
                 trackBy="name"
                 label="name"
@@ -77,7 +77,7 @@ export default {
     let category = await $axios.get("/api/categories");
     return {
       post: data.post,
-      postCategories: data.categories,
+      postCategory: data.category,
       categories: category.data,
     };
   },
@@ -112,7 +112,7 @@ export default {
         .put(`api/posts/${this.$route.params.id}`, {
           title: this.post.title,
           content: this.post.content,
-          categories: this.postCategories,
+          categoryId: this.postCategory[0],
         })
         .then((res) => {
           console.log(res.data);

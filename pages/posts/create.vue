@@ -18,7 +18,7 @@
                 noResultsText="一致する検索結果がありません。"
                 :createTag="false"
                 :options="categories"
-                :max="3"
+                :max="1"
                 valueProp="id"
                 trackBy="name"
                 label="name"
@@ -105,7 +105,7 @@ export default {
         .post("api/posts", {
           title: this.post.title,
           content: this.post.content,
-          categories: this.post.categories,
+          category: this.post.categories[0],
         })
         .then((res) => {
           console.log(res.data.post.id);

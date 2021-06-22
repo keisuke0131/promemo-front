@@ -3,19 +3,36 @@
     <main>
       <Sidebar page="2" />
       <div class="main-contents">
-        <div class="category-scroll">
-          <div
-            class="category"
-            v-for="category of categories"
-            :key="category.id"
+        <div>
+          <Draggable
+            @end="updateCategoryOrderNumber"
+            class="category-wrap"
+            v-model="categories"
           >
-            <div>
-              <h3>{{ category.name }}</h3>
-              <div class="memo" v-for="post in category.posts" :key="post.id">
-                {{ post.title }}
+            <div
+              class="category"
+              v-for="(category, categoryIndex) in categories"
+              :key="`${category.id}${categoryIndex}`"
+            >
+              <div>
+                <h3>{{ category.name }}</h3>
+                <Draggable
+                  @end="updateOrderNumber"
+                  v-model="category.posts"
+                  group="category"
+                  :data-category-index="categoryIndex"
+                >
+                  <div
+                    class="memo"
+                    v-for="(post, index) in category.posts"
+                    :key="`${post.id}${index}${categoryIndex}`"
+                  >
+                    {{ post.title }}
+                  </div>
+                </Draggable>
               </div>
             </div>
-          </div>
+          </Draggable>
         </div>
       </div>
     </main>
@@ -23,16 +40,51 @@
 </template>
 
 <script>
+import Draggable from "vuedraggable";
 export default {
   data() {
     return {
       categories: [],
     };
   },
+  components: {
+    Draggable,
+  },
   created() {
     this.$axios.get("api/myMemo").then((res) => {
       this.categories = res.data;
     });
+  },
+  methods: {
+    updateOrderNumber(event) {
+      this.$axios
+        .post("/api/updateOrderNumber", {
+          newIndex: event.newIndex + 1,
+          oldIndex: event.oldIndex + 1,
+          categoryFromIndex:
+            Number(event.from.getAttribute("data-category-index")) + 1,
+          categoryToindex:
+            Number(event.to.getAttribute("data-category-index")) + 1,
+        })
+        .then((res) => {})
+        .catch((err) => {});
+    },
+
+    updateCategoryOrderNumber(event) {
+      this.$axios
+        .post("/api/updateCategoryOrderNumber", {
+          newIndex: event.newIndex + 1,
+          oldIndex: event.oldIndex + 1,
+          //   categoryFromIndex:
+          //     Number(event.from.getAttribute("data-category-index")) + 1,
+          //   categoryToindex:
+          //     Number(event.to.getAttribute("data-category-index")) + 1,
+        })
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {});
+    },
   },
 };
 </script>
@@ -47,10 +99,10 @@ main {
     width: 1000px;
   }
 
-  .category-scroll {
+  .category-wrap {
     width: 100%;
-    overflow: scroll;
     display: flex;
+    flex-wrap: wrap;
   }
 
   .category {
