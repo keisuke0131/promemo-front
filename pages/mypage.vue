@@ -13,6 +13,11 @@
               class="category"
               v-for="(category, categoryIndex) in categories"
               :key="`${category.id}${categoryIndex}`"
+              :class="
+                category.category_color[0]
+                  ? category.category_color[0].color_name
+                  : category.default_color_name
+              "
             >
               <div>
                 <h3>{{ category.name }}</h3>
@@ -131,6 +136,7 @@ main {
       margin: 0 15px 15px 0;
       padding: 20px;
       border: 1px solid $BORDER_GRAY01;
+      background: white;
     }
   }
 }

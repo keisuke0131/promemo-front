@@ -31,6 +31,10 @@
                     >プロフィール</nuxt-link
                   >
                 </li>
+                <li @click="onOpen">
+                  <i class="fas fa-palette"></i>
+                  <nuxt-link :to="'/categories/setting'">色設定</nuxt-link>
+                </li>
                 <li>
                   <button @click="logout">
                     <i class="fas fa-sign-out-alt"></i> ログアウト
@@ -126,6 +130,9 @@ header {
 
       .account-dropdown-list {
         position: relative;
+        a {
+          width: 100%;
+        }
       }
 
       .dropdown-open-bg {
