@@ -86,7 +86,7 @@
 
 <script>
 export default {
-  middleware: "not_logined_admin_user",
+  middleware: "not_logined_user",
   layout: "admin",
   async fetch({ store }) {
     const Posts = await store.dispatch("Posts/fetchList");

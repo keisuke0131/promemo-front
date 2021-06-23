@@ -20,6 +20,7 @@
 import settingItem from "../categories/settingItem.vue";
 
 export default {
+  middleware: "not_logined_user",
   async asyncData({ $axios, params }) {
     let categories = null;
 

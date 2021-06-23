@@ -45,6 +45,7 @@
 </template>
 <script>
 export default {
+  middleware: "not_logined_user",
   props: {
     categoryProp: Object,
   },

@@ -18,6 +18,7 @@
 
 <script>
 export default {
+  middleware: "not_logined_user",
   data() {
     return {
       user: {

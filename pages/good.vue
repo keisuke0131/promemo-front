@@ -17,7 +17,9 @@
 </template>
 
 <script>
-export default {};
+export default {
+  middleware: "not_logined_user",
+};
 </script>
 
 <style lang="scss" scoped>
