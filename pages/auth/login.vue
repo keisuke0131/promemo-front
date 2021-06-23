@@ -23,7 +23,7 @@
 <script>
 export default {
   layout: "not_login",
-  middleware: "logined_user",
+  // middleware: "logined_user",
   props: {
     page: {},
   },

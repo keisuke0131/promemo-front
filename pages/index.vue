@@ -12,7 +12,7 @@
 <script>
 import MemoItem from "../components/MemoItem";
 export default {
-  middleware: "not_logined_user",
+  // middleware: "not_logined_user",
   async fetch({ store }) {
     const Posts = await store.dispatch("Posts/fetchList");
     store.commit("Posts/setList", Posts);
