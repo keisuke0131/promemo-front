@@ -69,6 +69,7 @@
 import Multiselect from "../../node_modules/@vueform/multiselect/dist/multiselect.vue2.js";
 
 export default {
+  middleware: "not_logined_user",
   props: {
     page: {},
   },

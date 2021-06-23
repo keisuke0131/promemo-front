@@ -16,6 +16,7 @@
 
 <script>
 export default {
+  middleware: "not_logined_user",
   async fetch({ store }) {
     const Categories = await store.dispatch("Categories/fetchList");
     store.commit("Categories/setList", Categories);

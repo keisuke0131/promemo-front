@@ -2,8 +2,6 @@ export const state = () => ({
   // 認証中の一般ユーザー
   auth_user: null,
   isLoggedIn: false,
-  // 認証中の管理者ユーザー
-  admin_user: null
 })
 
 export const mutations = {

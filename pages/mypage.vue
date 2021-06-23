@@ -47,6 +47,7 @@
 <script>
 import Draggable from "vuedraggable";
 export default {
+  middleware: "not_logined_user",
   data() {
     return {
       categories: [],

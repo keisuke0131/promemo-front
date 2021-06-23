@@ -12,11 +12,13 @@
 <script>
 import MemoItem from "../../../components/MemoItem";
 export default {
-async asyncData({ $axios,params }) {
-  const { data } = await $axios.get(`/api/categories/${params.id}`);
-    return {
-      posts: data.category.posts
-    };
+  middleware: "not_logined_user",
+
+  async asyncData({ $axios,params }) {
+    const { data } = await $axios.get(`/api/categories/${params.id}`);
+      return {
+        posts: data.category.posts
+      };
   },
   comments: {
     MemoItem,

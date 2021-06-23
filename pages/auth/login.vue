@@ -2,17 +2,19 @@
   <div>
     <main>
       <div class="login-form-wrap">
+        <div class="head">
+          <img src="@/assets/image/logo.png" alt="">
+        </div>
         <form @submit.prevent="login">
           <div class="form-group">
-            <label for="email">メールアドレス</label>
-            <input type="text" id="email" v-model="user.email" />
+            <input type="text" id="email" v-model="user.email" placeholder="メールアドレス"/>
           </div>
           <div class="form-group">
-            <label for="password">パスワード</label>
-            <input type="password" id="password" v-model="user.password" />
+            <input type="password" id="password" v-model="user.password" placeholder="パスワード" />
           </div>
           <button type="submit">ログイン</button>
         </form>
+        <nuxt-link to="/users/create">新規会員登録はこちら</nuxt-link>
       </div>
     </main>
   </div>
@@ -20,6 +22,8 @@
 
 <script>
 export default {
+  layout: "not_login",
+  middleware: "logined_user",
   props: {
     page: {},
   },
@@ -53,38 +57,62 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.login-form-wrap {
-  box-shadow: 5px 5px 25px -10px rgba(0, 0, 0, 0.3);
-  border-radius: 5px;
-  width: 480px;
-  margin: 0 auto;
-  padding: 20px 15px;
-  border: 1px solid rgb(243, 243, 243);
+main{
+  display:flex;
+  align-items:center;
+  height:100vh;
+  background:url("@/assets/image/login-bg.jpg");
+}
 
+.login-form-wrap {
+  box-shadow: 1px 2px rgba(128, 128, 128, 0.425);
+  width: 50%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 8.5vh 30px;
+  border: 1px solid rgb(243, 243, 243);
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.9);
+  text-align: center;
+  .head{
+    text-align: center;
+    img{
+      display: inline-block;
+      margin:0 0 30px 0;
+    }
+  }
   .form-group {
     margin: 10px 0;
-
+    text-align: left;
     label {
       display: block;
     }
-
     input {
-      border: 1px solid rgb(218, 218, 218);
       display: block;
       width: 100%;
-      padding: 3px 5px;
-
+      margin:0 0 15px 0;
+      padding: 10px 5px;
+      border-bottom: 1px solid rgb(218, 218, 218);
       &:focus {
         outline: none;
       }
     }
   }
   button {
-      color: white;
-      font-weight: bold;
-      background-color:rgb(184, 214, 255);
-      border-radius: 3px;
-      padding: 0 10px;
-    }
+    display: inline-block;
+    margin:20px 0 0 0;
+    padding: 10px 50px;
+    border-radius: 3px;
+    background:rgb(78, 137, 219);
+    color: white;
+    font-weight: bold;
+  }
+  a,a:link,a:visited,a:active{
+    display: inline-block;
+    margin: 20px 0 0 0;
+    color:#333;
+    font-size:0.7em;
+    text-decoration: underline;
+  }
 }
 </style>
