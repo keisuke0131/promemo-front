@@ -117,6 +117,11 @@ export default {
         .catch((err) => {
           console.log(err);
         });
+
+      this.toggleLoading(true)
+      setTimeout(() => {
+        this.toggleLoading(false)
+      }, 3000)
     },
     update: function (e) {
       this.input = e.target.value;
@@ -125,6 +130,9 @@ export default {
       console.log(this.isPreview);
       this.isPreview = !this.isPreview;
     },
+    toggleLoading (loading) {
+      this.$nuxt.$emit('toggleLoading', loading)
+    }
   },
 };
 </script>
