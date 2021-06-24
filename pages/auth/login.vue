@@ -23,7 +23,7 @@
 <script>
 export default {
   layout: "not_login",
-  // middleware: "logined_user",
+  middleware: "logined_user",
   props: {
     page: {},
   },
@@ -45,7 +45,7 @@ export default {
           .then((res) => {
             this.$store.dispatch("auth/loginAuthUser");
             console.log(res.data);
-            this.$router.push("/");
+            this.$router.go();
           })
           .catch((err) => {
             console.log(err);
