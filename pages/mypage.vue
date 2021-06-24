@@ -97,19 +97,21 @@ export default {
 
 <style lang="scss" scoped>
 main {
+  width: 100%;
   .main-contents {
+    width: calc(100% - 200px);
     display: flex;
     flex-wrap: wrap;
+    @include mq(lg) {
+      width: 100% !important;
+    }
   }
 
   .category-wrap {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
-
-    @include mq(lg) {
-      justify-content: center;
-    }
+    justify-content: center;
   }
 
   .category {
@@ -119,6 +121,11 @@ main {
     padding: 20px;
     box-shadow: 0 5px 10px -3px rgba(0, 0, 0, 0.3);
     border: 1px solid $BORDER_GRAY01;
+    transition-duration: 0.2s;
+
+    &:active {
+      opacity: 0.6;
+    }
 
     @include mq(lg) {
       width: 45%;
@@ -138,6 +145,9 @@ main {
       padding: 20px;
       border: 1px solid $BORDER_GRAY01;
       background: white;
+      &:active {
+        opacity: 0.6;
+      }
     }
   }
 }

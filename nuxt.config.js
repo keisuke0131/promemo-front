@@ -29,7 +29,8 @@ export default {
 
   buildModules: [
     '@nuxtjs/vuetify',
-    '@nuxtjs/composition-api/module'
+    '@nuxtjs/composition-api/module',
+    '@nuxtjs/moment'
   ],
 
   modules: ["@nuxtjs/axios", '@nuxtjs/style-resources', "@nuxtjs/dotenv", "@nuxtjs/markdownit"],
@@ -40,6 +41,10 @@ export default {
       '@/assets/scss/_variable.scss',
       '@/assets/scss/_color.scss',
     ]
+  },
+  moment: {
+    // ここにオプションが記述できる
+    locales: ['ja']
   },
 
   markdownit: {

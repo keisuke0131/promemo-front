@@ -22,7 +22,7 @@
             <div class="DropdownOpenBg" @click="onOpen" v-if="isOpen"></div>
             <transition>
               <div class="DropdownList" v-if="isOpen">
-                <li @click="onOpen">
+                <li @click="onOpen" class="memo-edit-link">
                   <i class="fas fa-user-alt"></i>
                   <nuxt-link
                     :to="
@@ -31,11 +31,11 @@
                     >プロフィール</nuxt-link
                   >
                 </li>
-                <li @click="onOpen">
+                <li @click="onOpen" class="memo-edit-link">
                   <i class="fas fa-palette"></i>
                   <nuxt-link :to="'/categories/setting'">色設定</nuxt-link>
                 </li>
-                <li>
+                <li class="memo-edit-link" style="margin-right:0px;">
                   <button @click="logout">
                     <i class="fas fa-sign-out-alt"></i> ログアウト
                   </button>
@@ -101,8 +101,8 @@ header {
   // position: fixed;
   // top: 0;
   width: 100%;
-  height: 60px;
-  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.05);
+  height: 70px;
+  box-shadow: rgba(60, 64, 67, 0.06) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
   // background: rgb(239, 251, 255);
   background-color: white;
   text-align: center;

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="bg-color">
     <Header />
     <Nuxt />
   </div>
@@ -75,5 +75,10 @@ html {
 .button--grey:hover {
   color: #fff;
   background-color: #35495e;
+}
+
+.bg-color{
+  min-height: 600px;
+  background: rgba(202, 232, 255, 0.171) !important;
 }
 </style>

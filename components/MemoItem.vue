@@ -1,6 +1,7 @@
 <template>
   <div class="memo-wrap">
     <div class="memo">
+      <!-- タイトル -->
       <div class="memo-title-wrap">
         <h3>
           <nuxt-link :to="'/posts/' + post.id + '/show'">{{
@@ -22,29 +23,37 @@
           ></div>
           <transition>
             <div class="DropdownList" v-if="isOpenEllipsis">
-              <li @click="$router.push({ path: `/posts/${post.id}/edit` })">
+              <li
+                @click="$router.push({ path: `/posts/${post.id}/edit` })"
+                class="memo-edit-link"
+              >
                 <i class="fas fa-edit"></i> 編集
               </li>
-              <li @click="onClickDeleteIcon(post)">
+              <li @click="onClickDeleteIcon(post)" class="memo-delete-link">
                 <i class="fas fa-trash-alt"></i> 削除
               </li>
             </div>
           </transition>
         </div>
       </div>
-      <div>
-        <span>
-          <nuxt-link
-            class="category"
-            :class="
-              post.category.category_color[0]
-                ? post.category.category_color[0].color_name
-                : post.category.default_color_name
-            "
-            :to="'/'"
-            >{{ post.category.name }}</nuxt-link
-          >
-        </span>
+      <!-- 更新日時 -->
+      <div class="post-updated-at">
+        <i class="fas fa-sync"></i>
+        <span>{{ this.$moment(post.updated_at).format("YYYY-MM-DD") }}</span>
+      </div>
+      <!-- カテゴリー -->
+      <div class="category-wrap">
+        <nuxt-link
+          class="category"
+          :class="
+            post.category.category_color[0]
+              ? post.category.category_color[0].color_name
+              : post.category.default_color_name
+          "
+          :to="'/'"
+          >{{ post.category.name }}</nuxt-link
+        >
+        <i class="far fa-heart"></i>
       </div>
     </div>
   </div>
@@ -91,12 +100,12 @@ export default {
 }
 
 .memo-wrap {
-  width: calc(25% - 11.25px);
-  padding: 0 5px;
-  margin: 0 0px 15px 0;
+  width: calc(30% - 11.25px);
+  padding: 0 10px;
+  margin: 0 0px 30px 0;
 
   @include mq(lg) {
-    width: 30%;
+    width: 50%;
   }
 
   @include mq(md) {
@@ -108,9 +117,9 @@ export default {
   }
 
   .memo {
-    position: relative;
+    background: white;
     padding: 20px;
-    box-shadow: 0 5px 10px -3px rgba(0, 0, 0, 0.3);
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     border: 1px solid rgb(240, 240, 240);
 
     .memo-title-wrap {
@@ -131,12 +140,42 @@ export default {
       }
     }
 
-    .category {
-      display: inline-block;
+    .post-updated-at {
+      color: $GRAY01;
+
+      i {
+        font-size: 12px;
+      }
+
+      span {
+        font-size: 14px;
+      }
+    }
+
+    .category-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       margin: 10px 0 0 0;
-      padding: 5px 10px;
-      box-shadow: 1px 1px #bbb;
-      font-size: 0.75em;
+
+      .category {
+        display: inline-block;
+        padding: 2px 10px;
+        border-radius: 3px;
+        box-shadow: 1px 1px #bbb;
+        font-size: 0.75em;
+        transition-duration: 0.4s;
+
+        &:hover {
+          opacity: 0.6;
+        }
+      }
+
+      i {
+        color: rgb(176, 195, 255);
+        font-size: 16px;
+        margin-left: 10px;
+      }
     }
   }
 }
