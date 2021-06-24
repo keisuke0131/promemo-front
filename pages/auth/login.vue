@@ -67,6 +67,8 @@ export default {
 main{
   display:flex;
   align-items:center;
+  position: relative;
+  z-index: 2;
   height:100vh;
   background:url("@/assets/image/login-bg.jpg");
 }
