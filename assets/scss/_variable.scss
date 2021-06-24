@@ -23,10 +23,17 @@ $INPUT_GRAY_COlOR: rgb(85, 85, 85);
   }
 }
 
+.BlueAnimText {
+  transition: 0.3s;
+  &:hover {
+    color: $BLUE !important;
+  }
+}
+
 .DropdownOpenBg {
   position: fixed;
   top: 0;
-  right: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   z-index: 9998;
@@ -40,7 +47,7 @@ $INPUT_GRAY_COlOR: rgb(85, 85, 85);
   width: 200px;
   border: 1px solid rgb(235, 235, 235);
   background-color: white;
-  box-shadow: 2px 2px 5px 0px rgba(192, 192, 192, 0.281);
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px;
   z-index: 9999;
   li {
     padding: 10px;
@@ -48,6 +55,10 @@ $INPUT_GRAY_COlOR: rgb(85, 85, 85);
     align-items: center;
     margin: 0;
     display: flex;
+    transition-duration:0.4s;
+    background: white;
+    cursor: pointer;
+    z-index: 9999;
     &:not(:last-child) {
       border-bottom: 1px solid $BORDER_GRAY01;
     }
@@ -56,15 +67,55 @@ $INPUT_GRAY_COlOR: rgb(85, 85, 85);
       width: 100%;
       padding-left: 5px;
       display: block;
+      z-index: 9999;
+    }
+  }
+
+  .memo-edit-link{
+    transition-duration:0.4s;
+    z-index: 9999;
+    i {
+      transition-duration:0.1s;
+    }
+    a{
+      color: $GRAY01;
+      transition-duration:0.3s;
+    }
+    &:hover{
+      background: #abcdff;
+      color: white !important;
+
+      i {
+        color: white !important;
+      }
+
+      a{
+        color: white !important;
+      }
+    }
+  }
+
+  .memo-delete-link{
+    z-index: 9999;
+    i {
+      transition-duration:0.4s;
+    }
+    &:hover{
+      background: #ffabab;
+      color: white;
+
+      i {
+        color: white !important;
+      }
     }
   }
 }
 
 .two-columns-main {
   display: flex;
-  justify-content: space-around;
   margin: 50px auto 0 auto;
   padding: 0 50px;
+  justify-content: center;
 
   @include mq(lg) {
     display: block;
