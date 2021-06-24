@@ -5,19 +5,19 @@
         v-on:click="activetab = '1'"
         v-bind:class="[activetab === '1' ? 'active' : '']"
       >
-        <nuxt-link to="/">みんなのメモ</nuxt-link>
+        <nuxt-link class="BlueAnimText" to="/">みんなのメモ</nuxt-link>
       </li>
       <li
         v-on:click="activetab = '2'"
         v-bind:class="[activetab === '2' ? 'active' : '']"
       >
-        <nuxt-link to="/mypage">自分のメモ</nuxt-link>
+        <nuxt-link class="BlueAnimText" to="/mypage">自分のメモ</nuxt-link>
       </li>
       <li
         v-on:click="activetab = '3'"
         v-bind:class="[activetab === '3' ? 'active' : '']"
       >
-        <nuxt-link to="/good">保存した</nuxt-link>
+        <nuxt-link to="/good" class="BlueAnimText">保存した</nuxt-link>
       </li>
     </ul>
   </aside>
@@ -52,7 +52,7 @@ export default {
 
 <style lang="scss" scoped>
 aside {
-  width: 250px;
+  width: 100px;
   @include mq(lg) {
     width: 100%;
   }
