@@ -1,8 +1,13 @@
 <template>
-  <div>
-    <Header />
-    <Nuxt />
-  </div>
+  <v-app>
+    <div v-if="loading" id="loading">
+      <v-progress-circular indeterminate />
+    </div>
+    <v-content>
+     <Header />  
+      <Nuxt />
+    </v-content>
+  </v-app>
 </template>
 
 
@@ -21,6 +26,14 @@ export default {
         },
       ],
     };
+  },
+  data: () => ({
+    loading: false
+  }),
+  created () {
+    this.$nuxt.$on('toggleLoading', (loading) => {
+      this.loading = loading
+    })
   },
   components: {
     Header,
@@ -75,5 +88,16 @@ html {
 .button--grey:hover {
   color: #fff;
   background-color: #35495e;
+}
+
+#loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  z-index: 9999;
+  width: 100%;
+  height: 100vh;
+  background: rgba(#000, 0.5);
 }
 </style>
