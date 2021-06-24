@@ -23,7 +23,7 @@
 <script>
 export default {
   layout: "not_login",
-  // middleware: "logined_user",
+  middleware: "logined_user",
   props: {
     page: {},
   },
@@ -45,13 +45,20 @@ export default {
           .then((res) => {
             this.$store.dispatch("auth/loginAuthUser");
             console.log(res.data);
-            this.$router.push("/");
+            this.$router.go();
           })
           .catch((err) => {
             console.log(err);
           });
+      this.toggleLoading(true);
+      setTimeout(() => {
+        this.toggleLoading(false)
+      }, 3000)
       });
     },
+    toggleLoading (loading) {
+      this.$nuxt.$emit('toggleLoading', loading)
+    }
   },
 };
 </script>
@@ -60,6 +67,8 @@ export default {
 main{
   display:flex;
   align-items:center;
+  position: relative;
+  z-index: 2;
   height:100vh;
   background:url("@/assets/image/login-bg.jpg");
 }

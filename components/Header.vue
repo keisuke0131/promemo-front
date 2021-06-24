@@ -69,8 +69,8 @@ export default {
       this.$axios
         .post("http://localhost:8000/logout")
         .then((response) => {
-          // console.log(response);
           this.$store.dispatch("auth/logoutAuthUser");
+          this.$router.go();
         })
         .catch((err) => {});
     },

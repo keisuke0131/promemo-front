@@ -88,10 +88,17 @@ export default {
         .catch((err) => {
           console.log(err.response.data);
         });
+      this.toggleLoading(true);
+      setTimeout(() => {
+        this.toggleLoading(false)
+      }, 3000);
     },
     update: function (e) {
       this.input = e.target.value;
     },
+    toggleLoading (loading) {
+      this.$nuxt.$emit('toggleLoading', loading)
+    }
   },
 };
 </script>
