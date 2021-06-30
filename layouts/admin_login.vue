@@ -9,11 +9,11 @@
       <v-toolbar-title v-text="title" />
     </v-app-bar>
     <!-- コンテンツ部分 -->
-    <v-content>
+    <v-main>
       <v-container>
         <nuxt />
       </v-container>
-    </v-content>
+    </v-main>
     <!-- フッター部分 -->
     <v-footer
       :fixed="fixed"

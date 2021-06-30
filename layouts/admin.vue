@@ -32,11 +32,11 @@
       <v-spacer />
     </v-app-bar>
     <!-- コンテンツ部分 -->
-    <v-content>
+    <v-main>
       <v-container fluid pa-10>
         <nuxt />
       </v-container>
-    </v-content>
+    </v-main>
     <!-- フッター部分 -->
     <v-footer :fixed="fixed" app>
       <span>© {{ new Date().getFullYear() }}</span>
