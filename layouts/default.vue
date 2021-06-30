@@ -3,12 +3,12 @@
     <div v-if="loading" id="loading">
       <v-progress-circular indeterminate />
     </div>
-    <v-content>
+    <v-main>
       <div class="bg-color">
      <Header />  
       <Nuxt />
         </div>
-    </v-content>
+    </v-main>
   </v-app>
 </template>
 
@@ -96,6 +96,7 @@ html {
 .bg-color{
   min-height: 600px;
   background: rgba(202, 232, 255, 0.171) !important;
+}
 
 #loading {
   display: flex;
