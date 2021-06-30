@@ -3,9 +3,9 @@
     <div v-if="loading" id="loading">
       <v-progress-circular indeterminate />
     </div>
-    <v-content> 
+    <v-main> 
       <Nuxt />
-    </v-content>
+    </v-main>
   </v-app> 
 </template>
 

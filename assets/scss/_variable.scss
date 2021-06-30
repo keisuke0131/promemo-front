@@ -5,8 +5,13 @@ $BUTTON_BORDER_GRAY01: rgb(167, 167, 167);
 
 $BLUE: #7bb0fd;
 $BORDER_FOCUS_BLUE: #b5d2ff;
+$BLUE_HOVER_BACH: #abcdff;
 
 $INPUT_GRAY_COlOR: rgb(85, 85, 85);
+
+.BoxShadow {
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px;
+}
 
 .MaxWidth640 {
   max-width: 640px;
@@ -55,7 +60,7 @@ $INPUT_GRAY_COlOR: rgb(85, 85, 85);
     align-items: center;
     margin: 0;
     display: flex;
-    transition-duration:0.4s;
+    transition-duration: 0.4s;
     background: white;
     cursor: pointer;
     z-index: 9999;
@@ -71,36 +76,36 @@ $INPUT_GRAY_COlOR: rgb(85, 85, 85);
     }
   }
 
-  .memo-edit-link{
-    transition-duration:0.4s;
+  .memo-edit-link {
+    transition-duration: 0.4s;
     z-index: 9999;
     i {
-      transition-duration:0.1s;
+      transition-duration: 0.1s;
     }
-    a{
+    a {
       color: $GRAY01;
-      transition-duration:0.3s;
+      transition-duration: 0.3s;
     }
-    &:hover{
-      background: #abcdff;
+    &:hover {
+      background: #c3dbff;
       color: white !important;
 
       i {
         color: white !important;
       }
 
-      a{
+      a {
         color: white !important;
       }
     }
   }
 
-  .memo-delete-link{
+  .memo-delete-link {
     z-index: 9999;
     i {
-      transition-duration:0.4s;
+      transition-duration: 0.4s;
     }
-    &:hover{
+    &:hover {
       background: #ffabab;
       color: white;
 
