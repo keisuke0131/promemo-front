@@ -1,11 +1,10 @@
 <template>
   <div>
     <main>
-      <Sidebar page="1" />
       <div class="main-contents">
         <div class="memo">
           <div class="memo-title">
-            <h1>{{post.title}}</h1>
+            <h1>{{ post.title }}</h1>
             <span>2021/06/01</span>
           </div>
           <div class="memo-user">
@@ -18,13 +17,18 @@
 </template>
 
 <script>
+import postSidebar from "../postSidebar.vue";
+
 export default {
   middleware: "not_logined_user",
-  async asyncData({ $axios,params }) {
+  async asyncData({ $axios, params }) {
     const { data } = await $axios.get(`/api/posts/${params.id}`);
     return {
       post: data.post,
     };
+  },
+  components: {
+    postSidebar,
   },
   data() {
     return {
@@ -38,7 +42,7 @@ export default {
 <style lang="scss" scoped>
 main {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   width: 1250px;
   margin: 50px auto 0 auto;
   .main-contents {
@@ -47,6 +51,7 @@ main {
     width: 1000px;
     .memo {
       width: 100%;
+      background: white;
       min-height: calc(100vh - 200px);
       margin: 0 15px 15px 0;
       padding: 20px;
@@ -75,4 +80,12 @@ main {
     }
   }
 }
+</style>
+
+<style lang="scss">
+.table-of-contents{
+  color: $GRAY01;
+  border: 1px solid $BORDER_GRAY01;
+  padding: 20px 0;
+  }
 </style>

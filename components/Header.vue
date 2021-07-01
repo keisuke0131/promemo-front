@@ -14,9 +14,9 @@
         v-if="searchWord !== '' && isOpenSearchResult"
         class="search-result BoxShadow"
       >
-        <template v-if="posts.length">
+        <template v-if="posts && posts.length">
           <div v-for="post in posts" :key="post.id">
-            <nuxt-link @click.native="closeSearchResult" :to="'/posts/' + post.id + '/show'">{{
+            <nuxt-link @click.native="clickSearchResult" :to="'/posts/' + post.id + '/show'">{{
               post.title
             }}</nuxt-link>
           </div>
@@ -114,6 +114,10 @@ export default {
     },
     closeSearchResult() {
       this.isOpenSearchResult = false;
+    },
+    clickSearchResult(){    
+        this.isOpenSearchResult = false;
+        this.searchWord = '';
     },
     onOpen() {
       this.isOpen = !this.isOpen;
