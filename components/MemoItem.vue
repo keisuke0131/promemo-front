@@ -53,13 +53,15 @@
           :to="'/'"
           >{{ post.category.name }}</nuxt-link
         >
-        <i class="far fa-heart"></i>
+        <LikeComponent :post="post"></LikeComponent>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import LikeComponent from "./LikeComponent";
+
 export default {
   props: {
     post: Object,
@@ -69,6 +71,10 @@ export default {
     return {
       isOpenEllipsis: false,
     };
+  },
+
+  comments: {
+    LikeComponent,
   },
 
   methods: {
@@ -100,10 +106,12 @@ export default {
 }
 
 .memo-wrap {
-  width: calc(30% - 11.25px);
+  width: calc(25% - 15px);
   padding: 0 10px;
-  margin: 0 0px 30px 0;
-
+  margin: 0 20px 20px 0;
+  &:nth-of-type(4n){
+    margin: 0 0 30px 0;
+  }
   @include mq(lg) {
     width: 50%;
   }
