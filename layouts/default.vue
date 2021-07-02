@@ -4,10 +4,8 @@
       <v-progress-circular indeterminate />
     </div>
     <v-main>
-      <div class="bg-color">
-     <Header />  
+      <Header />  
       <Nuxt />
-        </div>
     </v-main>
   </v-app>
 </template>
@@ -93,10 +91,8 @@ html {
   background-color: #35495e;
 }
 
-
-.bg-color{
-  min-height: 600px;
-  background: rgba(202, 232, 255, 0.171) !important;
+.v-main__wrap {
+  background: rgba(212, 235, 253, 0.171);
 }
 
 #loading {

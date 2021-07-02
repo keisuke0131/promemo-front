@@ -34,7 +34,7 @@ main {
     width: calc(100% - 200px);
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    
     @include mq(lg) {
       width: 100% !important;
     }

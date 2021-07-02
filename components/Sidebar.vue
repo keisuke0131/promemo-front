@@ -52,7 +52,8 @@ export default {
 
 <style lang="scss" scoped>
 aside {
-  width: 120px;
+  width: 180px;
+  margin:0 20px 0 0;
   @include mq(lg) {
     width: 100%;
   }
