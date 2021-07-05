@@ -3,8 +3,16 @@
     <div class="header-logo">
       <nuxt-link to="/"><img src="@/assets/image/logo.png" alt="" /></nuxt-link>
     </div>
-    <div class="search">
-      <input v-model="searchWord" @focus="searchMemo" @input="searchMemo" type="text" />
+    <div class="search-icon">
+      <i class="fas fa-search" v-if="!isSearchActive" @click="clickSearchIcon"></i>
+    </div>
+    <div class="search" v-if="isSearchActive">
+      <input
+        v-model="searchWord"
+        @focus="searchMemo"
+        @input="searchMemo"
+        type="text"
+      />
       <div
         @click="closeSearchResult"
         v-if="searchWord !== '' && isOpenSearchResult"
@@ -16,9 +24,11 @@
       >
         <template v-if="posts && posts.length">
           <div v-for="post in posts" :key="post.id">
-            <nuxt-link @click.native="clickSearchResult" :to="'/posts/' + post.id + '/show'">{{
-              post.title
-            }}</nuxt-link>
+            <nuxt-link
+              @click.native="clickSearchResult"
+              :to="'/posts/' + post.id + '/show'"
+              >{{ post.title }}</nuxt-link
+            >
           </div>
         </template>
         <template v-else>
@@ -86,6 +96,7 @@ export default {
     return {
       isOpen: false,
       isOpenSearchResult: false,
+      isSearchActive: false,
       searchWord: "",
       posts: [],
     };
@@ -115,9 +126,12 @@ export default {
     closeSearchResult() {
       this.isOpenSearchResult = false;
     },
-    clickSearchResult(){    
-        this.isOpenSearchResult = false;
-        this.searchWord = '';
+    clickSearchResult() {
+      this.isOpenSearchResult = false;
+      this.searchWord = "";
+    },
+    clickSearchIcon() {
+      this.isSearchActive = true;
     },
     onOpen() {
       this.isOpen = !this.isOpen;
@@ -145,33 +159,38 @@ header {
   margin-bottom: 20px;
   width: 100%;
   height: 70px;
-  box-shadow: 2px 2px 1px 1px rgba(150, 150, 150, 0.082);
+  box-shadow: 1px 1px 1px 1px rgba(150, 150, 150, 0.082);
   background-color: white;
   text-align: center;
   z-index: 9997;
 
   .header-logo {
+    width: 120px;
     margin-left: 20px;
-    flex: 1;
     text-align: left;
-
     a {
       display: inline-block;
     }
-
     img {
-      width: 150px;
+      width: 100%;
     }
   }
 
-  .search {
-    flex: 1 1 0%;
-    position: relative;
+  .search-icon{
+    position: absolute; 
+    right:220px;
+    font-size: 1.25em;
+    color: #444;
+  }
 
+  .search {
+    position: absolute; 
+    right: 250px;
+    width: 500px;
     input {
-      border-radius: 20px;
-      border: 1px solid $BORDER_GRAY01;
       width: 100%;
+      border-radius: 10px;
+      border: 1px solid #ccc;
       text-align: left;
       padding: 5px 15px;
       &:focus {
