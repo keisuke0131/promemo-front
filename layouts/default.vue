@@ -92,7 +92,7 @@ html {
 }
 
 .v-main__wrap {
-  background: rgba(212, 235, 253, 0.171);
+  /* background: rgba(212, 235, 253, 0.171); */
 }
 
 #loading {
