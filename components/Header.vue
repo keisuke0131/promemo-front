@@ -156,7 +156,6 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
   width: 100%;
   height: 70px;
   box-shadow: 1px 1px 1px 1px rgba(150, 150, 150, 0.082);

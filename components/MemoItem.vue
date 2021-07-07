@@ -39,7 +39,7 @@
       <!-- 更新日時 -->
       <div class="post-updated-at">
         <i class="fas fa-sync"></i>
-        <span>{{ this.$moment(post.updated_at).format("YYYY-MM-DD") }}</span>
+        <span>{{ this.$moment(post.updated_at).format("YYYY.MM.DD") }}</span>
       </div>
       <!-- カテゴリー -->
       <div class="category-wrap">
