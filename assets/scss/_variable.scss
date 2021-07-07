@@ -18,16 +18,34 @@ $INPUT_GRAY_COlOR: rgb(85, 85, 85);
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
 }
 
+.InputField {
+  color: $GRAY01 ;
+  border: 1px solid $BORDER_GRAY01;
+  display: block;
+  width: 100%;
+  padding: 8px 8px;
+  border-radius: 5px;
+  transition-duration: 300ms;
+
+  &:focus {
+    color: $INPUT_GRAY_COlOR;
+    outline: none;
+    border: 1px solid $BORDER_FOCUS_BLUE;
+  }
+}
+
 .MaxWidth640 {
   max-width: 640px;
   margin: 0 auto;
 }
 
 .BlueAnimButton {
-  background-color: #5699ff;
+  background-color: #66a3ff;
   border-radius: 3px;
   padding: 5px 10px;
   transition: 0.3s;
+  color: white;
+  font-weight: bold;
   &:hover {
     background-color: #88b7ff;
   }
@@ -138,9 +156,9 @@ $INPUT_GRAY_COlOR: rgb(85, 85, 85);
 
 .toc-link {
   position: relative !important;
-  margin:5px 0;
+  margin: 5px 0;
 
-  &::before{
+  &::before {
     left: -15px !important;
   }
 }

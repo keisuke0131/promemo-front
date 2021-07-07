@@ -6,7 +6,7 @@
           <form @submit.prevent="createPost">
             <div class="form-group">
               <label for="title">タイトル</label>
-              <input type="text" id="title" v-model="post.title" />
+              <input type="text" class="InputField" id="title" v-model="post.title" />
             </div>
             <div class="form-group">
               <label for="category">カテゴリー</label>
@@ -33,6 +33,7 @@
                 cols="30"
                 rows="15"
                 v-model="post.content"
+                class="InputField"
                 @input="update"
               ></textarea>
             </div>
@@ -192,34 +193,6 @@ export default {
       color: $GRAY01;
       font-weight: bold;
       font-size: 16px;
-    }
-
-    input {
-      border: 1px solid $BORDER_GRAY01;
-      display: block;
-      width: 100%;
-      padding: 8px 8px;
-      border-radius: 5px;
-      color: $INPUT_GRAY_COlOR;
-
-      &:focus {
-        outline: none;
-        border: 1px solid $BORDER_FOCUS_BLUE;
-      }
-    }
-
-    textarea {
-      border: 1px solid $BORDER_GRAY01;
-      display: block;
-      color: $INPUT_GRAY_COlOR;
-      border-radius: 5px;
-      width: 100%;
-      padding: 10px 8px;
-
-      &:focus {
-        outline: none;
-        border: 1px solid $BORDER_FOCUS_BLUE;
-      }
     }
   }
   button {

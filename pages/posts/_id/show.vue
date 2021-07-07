@@ -1,7 +1,10 @@
 <template>
   <main>
+    <!-- タイトルと日付 -->
     <div class="post-title">
+      <!-- タイトル -->
       <h1>{{ post.title }}</h1>
+      <!-- 日付 -->
       <div class="post-date">
         <div>
           <i class="far fa-calendar-alt"></i>
@@ -13,14 +16,50 @@
         </div>
       </div>
     </div>
+    <!-- メインコンテンツとサイドバー -->
     <div class="main-wrap">
       <div class="main-contents">
-        <div class="memo BoxShadow2">
+        <!-- メモ本文 -->
+        <div class="memo BoxShadow">
           <div class="memo-user js-toc-content">
             <div v-html="$md.render(post.content)"></div>
           </div>
         </div>
+        <!-- コメント -->
+        <div class="comment-box BoxShadow">
+          <!-- コメント一覧 -->
+          <div>
+            <h3>コメント一覧</h3>
+            <div class="comment-item"></div>
+          </div>
+          <!-- コメント入力フォーム -->
+          <div class="comment-form">
+            <!-- コメントタイトル -->
+            <form @submit.prevent="submitComment('comment')">
+              <div>
+                <input
+                  type="text"
+                  class="InputField"
+                  placeholder="タイトルを入力してください。"
+                  v-model="inputComment.title"
+                />
+              </div>
+              <div>
+                <!-- コメント本文 -->
+                <textarea
+                  placeholder="コメント内容を入力してください。"
+                  cols="30"
+                  rows="10"
+                  class="InputField"
+                  v-model="inputComment.content"
+                ></textarea>
+              </div>
+              <button class="BlueAnimButton">投稿</button>
+            </form>
+          </div>
+        </div>
       </div>
+      <!-- サイドバー -->
       <div class="table-of-contents BoxShadow2">
         <h3>目次</h3>
         <div class="toc-wrap">
@@ -48,7 +87,13 @@ export default {
   },
   data() {
     return {
-      post: null,
+      post: {
+        comments:[{}]
+      },
+      inputComment:{
+        title:'',
+        content:'',
+      },
       parseHtml: null,
     };
   },
@@ -62,6 +107,19 @@ export default {
       collapseDepth: 100,
     });
   },
+  methods: {
+    submitComment(type){
+      this.$axios.post('api/comment/store',{
+        'postId':this.post.id,
+        'title':this.inputComment.title,
+        'content':this.inputComment.content,
+      }).then((res)=>{
+        console.log(res.data.comment)
+      }).catch((err)=>{
+
+      });
+    }
+  },
 };
 </script>
 
@@ -73,7 +131,7 @@ main {
     padding: 50px 0;
     text-align: center;
 
-    div{
+    div {
       padding: 0 10px;
     }
 
@@ -102,12 +160,13 @@ main {
   }
   .main-contents {
     width: calc(90% - 350px);
+    margin: 0 25px 15px 0;
     .memo {
       background: white;
       min-height: calc(100vh - 200px);
-      margin: 0 15px 15px 0;
-      padding: 20px;
       box-shadow: 0 2px 4px 0 rgba(155, 155, 155, 0.281);
+      padding: 20px;
+      margin-bottom: 50px;
       .memo-user {
         margin: 0 0 15px 0;
         p {
@@ -121,6 +180,26 @@ main {
         margin: 0 0 15px 0;
       }
     }
+
+    .comment-box {
+      background-color: white;
+      padding: 40px 30px;
+      margin-bottom: 50px;
+
+      .comment-form {
+        input {
+          margin-top: 20px;
+          margin-bottom: 20px;
+        }
+
+        button{
+          display: block;
+          margin: 20px 0 0 auto;
+          font-size: 14px;
+          padding: 5px 35px;
+        }
+      }
+    }
   }
 
   .table-of-contents {
@@ -128,7 +207,6 @@ main {
     color: $GRAY01;
     width: 350px;
     padding: 20px 10px;
-    border: 1px solid $BORDER_GRAY01;
     position: sticky;
     top: 30px;
     max-height: 400px;
