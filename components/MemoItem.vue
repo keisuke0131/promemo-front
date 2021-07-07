@@ -39,7 +39,7 @@
       <!-- 更新日時 -->
       <div class="post-updated-at">
         <i class="fas fa-sync"></i>
-        <span>{{ this.$moment(post.updated_at).format("YYYY-MM-DD") }}</span>
+        <span>{{ this.$moment(post.updated_at).format("YYYY.MM.DD") }}</span>
       </div>
       <!-- カテゴリー -->
       <div class="category-wrap">
@@ -106,9 +106,9 @@ export default {
 }
 
 .memo-wrap {
-  width: calc(25% - 15px);
+  width: calc(33% - 15px);
   padding: 0 10px;
-  margin: 0 20px 20px 0;
+  margin: 0 0px 20px 0;
   &:nth-of-type(4n){
     margin: 0 0 30px 0;
   }

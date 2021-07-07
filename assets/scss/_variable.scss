@@ -1,4 +1,5 @@
-$GRAY01: rgb(143, 143, 143);
+$GRAY01: rgb(156, 163, 175);
+$GRAY02: rgb(192, 196, 201);
 
 $BORDER_GRAY01: rgb(231, 231, 231);
 $BUTTON_BORDER_GRAY01: rgb(167, 167, 167);
@@ -11,6 +12,10 @@ $INPUT_GRAY_COlOR: rgb(85, 85, 85);
 
 .BoxShadow {
   box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px;
+}
+
+.BoxShadow2 {
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
 }
 
 .MaxWidth640 {
@@ -128,5 +133,14 @@ $INPUT_GRAY_COlOR: rgb(85, 85, 85);
 
   @include mq(md) {
     padding: 0px 20px;
+  }
+}
+
+.toc-link {
+  position: relative !important;
+  margin:5px 0;
+
+  &::before{
+    left: -15px !important;
   }
 }
