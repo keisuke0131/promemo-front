@@ -5,7 +5,7 @@
       <div class="post-date">
         <div>
           <i class="far fa-calendar-alt"></i>
-          <span>{{ this.$moment(post.updated_at).format("YYYY.MM.DD") }}</span>
+          <span>{{ this.$moment(post.created_at).format("YYYY.MM.DD") }}</span>
         </div>
         <div>
           <i class="fas fa-sync"></i>
