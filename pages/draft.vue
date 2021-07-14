@@ -1,9 +1,9 @@
 <template>
   <div>
     <main class="two-columns-main">
-      <Sidebar page="1" />
+      <Sidebar page="4" />
       <div class="main-contents">
-        <MemoItem v-for="post in Posts" :key="post.id" :post="post"></MemoItem>
+        <MemoItem v-for="post in posts" :key="post.id" :post="post"></MemoItem>
       </div>
     </main>
   </div>
@@ -13,16 +13,19 @@
 import MemoItem from "../components/MemoItem";
 export default {
   middleware: "not_logined_user",
-  async fetch({ store }) {
-    await store.dispatch("Posts/fetchList");
+  data() {
+    return {
+      posts: "",
+    };
   },
   comments: {
     MemoItem,
   },
-  computed: {
-    Posts() {
-      return this.$store.getters["Posts/list"];
-    },
+  async asyncData({ $axios }) {
+    const posts = await $axios.$get('/api/draft');
+    return {
+      posts
+    };
   },
 };
 </script>

@@ -1,45 +1,44 @@
 <template>
   <div>
-    <main>
-      <Sidebar page="3"/>
+    <main class="two-columns-main">
+      <Sidebar page="4" />
       <div class="main-contents">
-        <div class="memo" v-for="n of 12" :key="n">
-          <nuxt-link to="/">
-            <h3>いいねした</h3>
-            <p>
-              テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
-            </p>
-          </nuxt-link>
-        </div>
+        <MemoItem v-for="post in posts" :key="post.id" :post="post"></MemoItem>
       </div>
     </main>
   </div>
 </template>
 
 <script>
+import MemoItem from "../components/MemoItem";
 export default {
   middleware: "not_logined_user",
+  data() {
+    return {
+      posts: "",
+    };
+  },
+  comments: {
+    MemoItem,
+  },
+  async asyncData({ $axios }) {
+    const posts = await $axios.$get('/api/good');
+    return {
+      posts
+    };
+  },
 };
 </script>
 
 <style lang="scss" scoped>
 main {
-  display: flex;
-  justify-content: space-between;
-  width: 1250px;
-  margin: 100px auto 0 auto;
   .main-contents {
+    width: calc(100% - 200px);
     display: flex;
     flex-wrap: wrap;
-    width: 1000px;
-    .memo {
-      width: calc(25% - 11.25px);
-      margin: 0 15px 15px 0;
-      padding: 20px;
-      box-shadow: 0 2px 4px 0 rgba(155, 155, 155, 0.281);
-      &:nth-of-type(4n) {
-        margin: 0 0 15px 0;
-      }
+    
+    @include mq(lg) {
+      width: 100% !important;
     }
   }
 }

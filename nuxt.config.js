@@ -23,6 +23,7 @@ export default {
     "~/plugins/vue-shortkey.client.js",
     "~/plugins/loadUser.js",
     "~/plugins/vee-validate.js",
+    // "~/plugins/vue-js-toggle-button.js",
   ],
 
   components: true,
