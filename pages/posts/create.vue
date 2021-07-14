@@ -45,6 +45,9 @@
             >
               送信
             </button>
+            <span class="draft-btn" :class="{ 'draft-btn-active': post.draft }" @click="changeDraft">  
+              下書きモード
+            </span>
           </form>
         </div>
         <div v-else class="post-preview">
@@ -61,6 +64,8 @@
         >
           <i class="fas fa-video"></i>
         </button>
+
+
       </div>
     </main>
   </div>
@@ -79,6 +84,7 @@ export default {
       post: {
         title: null,
         content: null,
+        draft: null,
         categories: [],
       },
       categories: [],
@@ -109,6 +115,7 @@ export default {
         .post("api/posts", {
           title: this.post.title,
           content: this.post.content,
+          draft: this.post.draft,
           category: this.post.categories[0],
         })
         .then((res) => {
@@ -133,6 +140,9 @@ export default {
     },
     toggleLoading (loading) {
       this.$nuxt.$emit('toggleLoading', loading)
+    },
+    changeDraft(){
+      this.post.draft = !this.post.draft;
     }
   },
 };
@@ -201,5 +211,19 @@ export default {
     border-radius: 3px;
     padding: 5px 40px;
   }
+}
+
+.draft-btn{
+  cursor: pointer;
+  margin:0 0 0 20px;
+  padding:10px 30px;
+  border-radius: 10px;
+  opacity:0.35;
+  background: #e6b1b1;
+  color: #fff;
+}
+
+.draft-btn-active{
+  opacity: 1;
 }
 </style>

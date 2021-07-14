@@ -54,6 +54,7 @@ export const actions = {
     commit("setAuthUser", user);
     commit('setLoggedIn', true);
   },
+  
   logoutAuthUser({ commit }) {
     commit('setAuthUser', '');
     commit('setLoggedIn', false);

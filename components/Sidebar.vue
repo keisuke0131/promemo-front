@@ -2,29 +2,34 @@
   <aside>
     <ul>
       <li
-        v-on:click="activetab = '1'"
-        v-bind:class="[activetab === '1' ? 'active' : '']"
+        @click="activetab = '1'"
+        :class="[activetab === '1' ? 'active' : '']"
       >
         <nuxt-link class="BlueAnimText" to="/">みんなのメモ</nuxt-link>
       </li>
       <li
-        v-on:click="activetab = '2'"
-        v-bind:class="[activetab === '2' ? 'active' : '']"
+        @click="activetab = '2'"
+        :class="[activetab === '2' ? 'active' : '']"
       >
-        <nuxt-link class="BlueAnimText" to="/mypage">自分のメモ</nuxt-link>
+        <nuxt-link class="BlueAnimText" to="/mypage">カテゴリ</nuxt-link>
       </li>
       <li
-        v-on:click="activetab = '3'"
-        v-bind:class="[activetab === '3' ? 'active' : '']"
+        @click="activetab = '3'"
+        :class="[activetab === '3' ? 'active' : '']"
       >
-        <nuxt-link to="/good" class="BlueAnimText">保存した</nuxt-link>
+        <nuxt-link to="/good" class="BlueAnimText">お気に入り</nuxt-link>
+      </li>
+      <li
+        @click="activetab = '4'"
+        :class="[activetab === '4' ? 'active' : '']"
+      >
+        <nuxt-link to="/draft" class="BlueAnimText">下書き</nuxt-link>
       </li>
     </ul>
   </aside>
 </template>
 
 <script>
-import axios from "axios";
 export default {
   props: {
     page: {
@@ -33,20 +38,9 @@ export default {
   },
   data() {
     return {
-      data: "",
       activetab: this.page,
     };
-  },
-  async asyncData({ $axios }) {
-    // 取得先のURL
-    const url = "http://localhost:8000/api";
-    // リクエスト（Get）
-    const data = await $axios.$get(url);
-    // 配列で返ってくるのでJSONにして返却
-    return {
-      data,
-    };
-  },
+  }
 };
 </script>
 
