@@ -30,12 +30,64 @@
           <!-- コメント一覧 -->
           <div>
             <h3>コメント一覧</h3>
-            <div class="comment-item"></div>
+            <div
+              v-for="(comment, commentIndex) in post.comments"
+              :key="comment.id"
+            >
+              <div class="comment-item">
+                <div>
+                  <p class="comment-title">
+                    {{ comment.title }}<span>by {{ comment.user.name }}</span>
+                  </p>
+                </div>
+                <p>{{ comment.content }}</p>
+                <div class="reply-btn">
+                  <span>{{$moment(comment.created_at).fromNow()}}</span>
+                  <a href="#comment-form"
+                    @click="clickReplyBtn(comment.user, commentIndex)"
+                    class="BlueAnimText"
+                  >
+                    返信する
+                  </a>
+                </div>
+              </div>
+
+              <!-- リプライ一覧 -->
+              <div v-for="reply in comment.replies" :key="reply.id" class="reply-item">
+                <div class="reply-left-content"><i class="fas fa-reply fa-rotate-180"></i></div>
+                <div class="reply-right-content">
+                  <p class="comment-title">
+                    {{ reply.title }}<span>by {{ reply.user.name }}</span>
+                  </p>
+                  <p>{{ reply.content }}</p>
+                  <div class="reply-btn">
+                  <span>{{$moment(reply.created_at).fromNow()}}</span>
+                  <a href="#comment-form"
+                    @click="clickReplyBtn(comment.user, commentIndex)"
+                    class="BlueAnimText"
+                  >
+                    返信する
+                  </a>
+                </div>
+                </div>
+              </div>
+            </div>
           </div>
           <!-- コメント入力フォーム -->
-          <div class="comment-form">
+          <div class="comment-form" id="comment-form">
             <!-- コメントタイトル -->
-            <form @submit.prevent="submitComment('comment')">
+            <form @submit.prevent="submitCommentform">
+              <p class="comment-form-title">
+                {{ commentFormTypeJa }}を投稿する
+              </p>
+              <template v-if="commentFormType === 'reply'">
+                <div class="replyToUserWrap">
+                  <p>返信先：{{ replyToUserName }}</p>
+                  <button @click="clickCloseReplyBtn">
+                    <i class="fas fa-times"></i>
+                  </button>
+                </div>
+              </template>
               <div>
                 <input
                   type="text"
@@ -67,7 +119,7 @@
         </div>
       </div>
     </div>
-  </main>
+  </main>   
 </template>
 
 <script>
@@ -88,13 +140,21 @@ export default {
   data() {
     return {
       post: {
-        comments:[{}]
+        comments: [
+          {
+            replies: [{}],
+            user: {},
+          },
+        ],
       },
-      inputComment:{
-        title:'',
-        content:'',
+      inputComment: {
+        title: "",
+        content: "",
       },
       parseHtml: null,
+      replyToUserName: "",
+      replyToCommnetIndex: "",
+      commentFormType: "comment",
     };
   },
   mounted() {
@@ -107,18 +167,61 @@ export default {
       collapseDepth: 100,
     });
   },
+  computed: {
+    commentFormTypeJa: function () {
+      return this.commentFormType === "comment"
+        ? "コメント"
+        : "コメントへの返信";
+    },
+  },
   methods: {
-    submitComment(type){
-      this.$axios.post('api/comment/store',{
-        'postId':this.post.id,
-        'title':this.inputComment.title,
-        'content':this.inputComment.content,
-      }).then((res)=>{
-        console.log(res.data.comment)
-      }).catch((err)=>{
-
-      });
-    }
+    submitCommentform() {
+      if (this.commentFormType === "comment") {
+        this.submitComment();
+      } else {
+        this.submitReply();
+      }
+    },
+    submitComment() {
+      this.$axios
+        .post(`api/comment/store`, {
+          postId: this.post.id,
+          title: this.inputComment.title,
+          content: this.inputComment.content,
+        })
+        .then((res) => {
+          this.post.comments.push(res.data.comment);
+          this.inputComment.title = "";
+          this.inputComment.content = "";
+        })
+        .catch((err) => {});
+    },
+    submitReply() {
+      this.$axios
+        .post(`api/reply/store`, {
+          commentId: this.post.comments[this.replyToCommentIndex].id,
+          title: this.inputComment.title,
+          content: this.inputComment.content,
+        })
+        .then((res) => {
+          this.post.comments[this.replyToCommentIndex].replies.push(
+            res.data.reply
+          );
+          this.inputComment.title = "";
+          this.inputComment.content = "";
+        })
+        .catch((err) => {});
+    },
+    clickReplyBtn(user, commentIndex) {
+      // this.isShowingReply = true;
+      this.commentFormType = "reply";
+      this.replyToCommentIndex = commentIndex;
+      this.replyToUserName = user.name;
+    },
+    clickCloseReplyBtn() {
+      // this.isShowingReply = false;
+      this.commentFormType = "comment";
+    },
   },
 };
 </script>
@@ -136,6 +239,7 @@ main {
     }
 
     h1 {
+      color: $BLUE;
       font-size: 22px;
       margin-bottom: 10px;
     }
@@ -186,13 +290,95 @@ main {
       padding: 40px 30px;
       margin-bottom: 50px;
 
+      h3{
+        color: $BLUE;
+      }
+
+      .comment-item {
+        border-bottom: 1px solid $BORDER_GRAY01;
+        padding: 1.5rem 0 1rem 0;
+      }
+
+      .comment-title {
+          font-weight: bold;
+          span{
+            padding-left: 10px;
+            font-size: 13px;
+            color: $GRAY01;
+          }
+        }
+
+        .reply-btn {
+          display: flex;
+          color: $GRAY01;
+          justify-content: space-between;
+          font-size: 14px;
+
+          a{
+            color: $GRAY01;
+          }
+        }
+
+      .replyToUserWrap {
+        display: flex;
+        margin-top: 15px;
+
+        p {
+          margin-bottom: 0px;
+          margin-right: 10px;
+          padding: 1px 5px;
+          color: white;
+          background: $GRAY02;
+          font-size: 15px;
+          font-weight: bold;
+        }
+
+        button {
+          margin: 0px !important;
+          padding: 0px !important;
+          color: $GRAY01;
+
+          &:hover {
+            color: $BLUE;
+          }
+        }
+      }
+
+      .reply-item{
+        display: flex;
+        padding: 10px;
+
+        .reply-left-content{
+          width: 10%;
+          text-align: right;
+          padding-right: 15px;
+          color: $GRAY02;
+          font-size: 20px;
+        }
+
+        .reply-right-content{
+          padding: 10px 0;
+          border-bottom: 1px dashed $BORDER_GRAY01;
+          width: 90%;
+          margin-left: auto;
+
+        }
+      }
+
       .comment-form {
+        margin-top: 100px;
+        .comment-form-title {
+          font-size: 20px;
+          font-weight: bold;
+          color: $BLUE;
+        }
+
         input {
           margin-top: 20px;
           margin-bottom: 20px;
         }
 
-        button{
+        a {
           display: block;
           margin: 20px 0 0 auto;
           font-size: 14px;
@@ -212,6 +398,7 @@ main {
     max-height: 400px;
 
     h3 {
+      color: $BLUE;
       margin-bottom: 15px;
     }
 
