@@ -19,6 +19,8 @@ export default {
  },
  mounted() {
  },
+ mounted() {
+ },
  methods: {
   first_check() {
     this.$axios.get(`/api/posts/${this.post.id}/firstcheck`).then((res) => {
