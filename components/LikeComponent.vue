@@ -15,13 +15,9 @@ export default {
    }
  },
  created() {
-<<<<<<< Updated upstream
   //  this.first_check()
-=======
-  // this.first_check(); 
  },
  mounted() {
->>>>>>> Stashed changes
  },
  methods: {
    first_check() {
