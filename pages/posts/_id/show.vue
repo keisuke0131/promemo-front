@@ -21,9 +21,11 @@
       <div class="main-contents">
         <!-- メモ本文 -->
         <div class="memo BoxShadow">
-          <div class="memo-user js-toc-content">
-            <div v-html="$md.render(post.content)"></div>
-          </div>
+          <pre v-highlightjs>
+            <div class="memo-user js-toc-content">
+              <div v-html="$md.render(post.content)"></div>
+            </div>
+          </pre>
         </div>
         <!-- コメント -->
         <div class="comment-box BoxShadow">
