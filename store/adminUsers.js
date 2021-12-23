@@ -12,7 +12,6 @@ export const state = () => ({
     setList (state, data) {
       state.adminUsers = data
     },
-    //追加
     create (state, data) {
       state.adminUsers.push(data)
     },
@@ -39,7 +38,6 @@ export const state = () => ({
           console.log(err)
         })
     },
-    //追加
     async create ({ commit }, adminUser) {
       const response = await this.$axios.$post('/admin_users', adminUser)
         .catch(err => {

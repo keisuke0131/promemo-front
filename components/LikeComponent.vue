@@ -15,11 +15,14 @@ export default {
    }
  },
  created() {
-  //  this.first_check()
+  // this.first_check(); 
+ },
+ mounted() {
+  this.first_check(); 
  },
  methods: {
-   first_check() {
-     this.$axios.get(`/api/posts/${this.post.id}/firstcheck`).then((res) => {
+  first_check() {
+    this.$axios.get(`/api/posts/${this.post.id}/firstcheck`).then((res) => {
        if(res.data[0] == 1) {
          this.status = true
          this.count = res.data[1]

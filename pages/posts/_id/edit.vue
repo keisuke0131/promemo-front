@@ -45,6 +45,10 @@
             >
               更新
             </button>
+
+            <span class="draft-btn" :class="{ 'draft-btn-active': post.draft }" @click="changeDraft">  
+              下書きモード
+            </span>
           </form>
         </div>
         <div v-else class="post-preview">
@@ -90,6 +94,7 @@ export default {
       post: {
         title: null,
         content: null,
+        draft: null,
         categories: [
           {
             id: null,
@@ -113,6 +118,7 @@ export default {
         .put(`api/posts/${this.$route.params.id}`, {
           title: this.post.title,
           content: this.post.content,
+          draft: this.post.draft,
           categoryId: this.postCategory[0],
         })
         .then((res) => {
@@ -129,6 +135,9 @@ export default {
       console.log(this.isPreview);
       this.isPreview = !this.isPreview;
     },
+    changeDraft(){
+      this.post.draft = !this.post.draft;
+    }
   },
 };
 </script>
@@ -230,5 +239,19 @@ export default {
     border-radius: 3px;
     padding: 5px 40px;
   }
+}
+
+.draft-btn{
+  cursor: pointer;
+  margin:0 0 0 20px;
+  padding:10px 30px;
+  border-radius: 10px;
+  opacity:0.35;
+  background: #e6b1b1;
+  color: #fff;
+}
+
+.draft-btn-active{
+  opacity: 1;
 }
 </style>
