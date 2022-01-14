@@ -16,13 +16,20 @@ export default {
     link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }]
   },
 
-  css: ["@/assets/style/style.css"],
+  css: [
+    "~/assets/style/style.css",
+    {
+      src: '~/node_modules/highlight.js/styles/tomorrow-night-bright.css',
+      lang: 'css'
+    },
+  ],
 
   plugins: [
     "~/plugins/axios",
     "~/plugins/vue-shortkey.client.js",
     "~/plugins/loadUser.js",
     "~/plugins/vee-validate.js",
+    "~/plugins/vue-highlightjs",
     // "~/plugins/vue-js-toggle-button.js",
   ],
 
