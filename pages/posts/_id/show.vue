@@ -108,7 +108,7 @@
                   v-model="inputComment.content"
                 ></textarea>
               </div>
-              <button class="BlueAnimButton">投稿</button>
+              <button class="BlueAnimButton">コメントを投稿</button>
             </form>
           </div>
         </div>
@@ -385,6 +385,10 @@ main {
           margin: 20px 0 0 auto;
           font-size: 14px;
           padding: 5px 35px;
+        }
+
+        .BlueAnimButton {
+          margin: 20px 0 0 0;
         }
       }
     }
