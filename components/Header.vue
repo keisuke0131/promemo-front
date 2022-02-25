@@ -177,7 +177,7 @@ header {
 
   .search-icon{
     position: absolute; 
-    right:220px;
+    right:250px;
     font-size: 1.25em;
     color: #444;
   }
