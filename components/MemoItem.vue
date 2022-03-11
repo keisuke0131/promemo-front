@@ -53,7 +53,24 @@
           :to="'/'"
           >{{ post.category.name }}</nuxt-link
         >
-        <LikeComponent :post="post"></LikeComponent>
+        <div>
+          <button
+            v-if="status !== 1"
+            type="button"
+            @click.prevent="like_check"
+            class="btn btn-outline-warning"
+          >
+            &#9825;</button
+          >
+          <button
+            v-else
+            type="button"
+            @click.prevent="like_check"
+            class="btn btn-warning"
+          >
+            &#9829;</button
+          ><a v-if="status == true" href="#">{{ count }}</a>
+        </div>
       </div>
     </div>
   </div>
@@ -70,6 +87,7 @@ export default {
   data() {
     return {
       isOpenEllipsis: false,
+      status: this.post.likes[0].like
     };
   },
 
@@ -88,6 +106,21 @@ export default {
     },
     async onClickDeleteIcon(post) {
       await this.$store.dispatch("Posts/delete", post);
+    },
+    like_check() {
+      this.$axios
+        .get(`/api/posts/${this.post.id}/check`)
+        .then((res) => {
+          console.log(res)
+          if (res.data.like == 1) {
+            this.status = 0
+          } else {
+            this.status = 1
+          }
+        })
+        .catch(function (err) {
+          console.log(err);
+        });
     },
   },
 };
@@ -109,7 +142,7 @@ export default {
   width: calc(33% - 15px);
   padding: 0 10px;
   margin: 0 0px 20px 0;
-  &:nth-of-type(4n){
+  &:nth-of-type(4n) {
     margin: 0 0 30px 0;
   }
   @include mq(lg) {
