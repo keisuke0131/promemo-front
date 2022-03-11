@@ -15,7 +15,7 @@ export default {
    }
  },
  created() {
-  // this.first_check(); 
+  this.first_check(); 
  },
  mounted() {
  },
