@@ -115,14 +115,15 @@ main {
   }
 
   .category {
-    width: 300px;
-    min-width: 300px;
+    width: calc(20% - 12px);
     margin: 0 15px 15px 0;
     padding: 20px;
     box-shadow: 0 5px 10px -3px rgba(0, 0, 0, 0.3);
     border: 1px solid $BORDER_GRAY01;
     transition-duration: 0.2s;
-
+    &:last-of-type{
+      margin-right: 0;
+    }
     &:active {
       opacity: 0.6;
     }
