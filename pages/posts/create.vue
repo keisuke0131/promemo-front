@@ -43,21 +43,23 @@
                 @input="update"
               ></textarea>
             </div>
-            <button
-              type="submit"
-              v-shortkey.once="['ctrl', 's']"
-              @shortkey="createPost"
-              class="BlueAnimButton"
-            >
-              送信
-            </button>
-            <span
-              class="draft-btn"
-              :class="{ 'draft-btn-active': post.draft }"
-              @click="changeDraft"
-            >
-              下書きモード
-            </span>
+            <div class="button-list">
+              <button
+                type="submit"
+                v-shortkey.once="['ctrl', 's']"
+                @shortkey="createPost"
+                class="BlueAnimButton"
+              >
+                送信
+              </button>
+              <span
+                class="draft-btn"
+                :class="{ 'draft-btn-active': post.draft }"
+                @click="changeDraft"
+              >
+                下書きモード
+              </span>
+            </div>
           </form>
         </div>
         <div v-else class="post-preview">
@@ -225,6 +227,10 @@ main {
       border-radius: 3px;
       padding: 5px 40px;
     }
+  }
+
+  .button-list {
+    margin:15px 0 0 0;
   }
 
   .draft-btn {
