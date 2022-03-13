@@ -213,6 +213,12 @@ export default {
         margin-left: 10px;
       }
     }
+
+    .DropdownList {
+      i {
+        margin:0 3px 0 0;
+      }
+    }
   }
 }
 </style>
