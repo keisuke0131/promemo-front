@@ -60,8 +60,8 @@
             @click.prevent="like_check"
             class="btn btn-outline-warning"
           >
-            &#9825;</button
-          >
+            &#9825;
+          </button>
           <button
             v-else
             type="button"
@@ -87,7 +87,7 @@ export default {
   data() {
     return {
       isOpenEllipsis: false,
-      status: this.post.likes[0].like
+      status: this.post.likes[0].like,
     };
   },
 
@@ -96,11 +96,6 @@ export default {
   },
 
   methods: {
-    log(color) {
-      if (color == "php") {
-        return "php";
-      }
-    },
     isOpen() {
       this.isOpenEllipsis = !this.isOpenEllipsis;
     },
@@ -108,15 +103,15 @@ export default {
       await this.$store.dispatch("Posts/delete", post);
     },
     like_check() {
+      if (this.status === 1) {
+        this.status = 0;
+      } else {
+        this.status = 1;
+      }
       this.$axios
         .get(`/api/posts/${this.post.id}/check`)
         .then((res) => {
-          console.log(res)
-          if (res.data.like == 1) {
-            this.status = 0
-          } else {
-            this.status = 1
-          }
+          console.log(res);
         })
         .catch(function (err) {
           console.log(err);
