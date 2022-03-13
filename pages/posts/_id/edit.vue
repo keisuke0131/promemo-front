@@ -1,6 +1,7 @@
 <template>
   <div>
     <main>
+      <h1>投稿編集画面</h1>
       <div class="post-form-wrap">
         <div v-if="!isPreview" class="post-form">
           <form @submit.prevent="updatePost">
@@ -145,113 +146,119 @@ export default {
 <style src="@vueform/multiselect/themes/default.css"></style>
 
 <style lang="scss" scoped>
-.post-form-wrap {
-  position: relative;
-  max-width: 640px;
-  margin: 0 auto;
-  padding: 0 20px;
+main {
+  width: 90%;
+  max-width: 1000px;
+  margin: 40px auto;
+  h1 {
+    color: #618be7;
+  }
+  .post-form-wrap {
+    position: relative;
+    margin: 40px auto;
+    padding: 0 20px;
+    .preview-icon {
+      position: absolute;
+      top: 0;
+      right: -50px;
+      z-index: 9999px;
+      color: white;
+      width: 50px;
+      height: 50px;
+      background-color: rgb(196, 215, 255);
+      text-align: center;
+      border-radius: 50%;
+      box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.5),
+        0 1px 1px rgba(0, 0, 0, 0.19);
+      border-bottom: solid 2px #b5b5b5;
+      overflow: hidden;
 
-  .preview-icon {
-    position: absolute;
-    top: 0;
-    right: -50px;
-    z-index: 9999px;
-    color: white;
-    width: 50px;
-    height: 50px;
-    background-color: rgb(196, 215, 255);
-    text-align: center;
-    border-radius: 50%;
-    box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.5),
-      0 1px 1px rgba(0, 0, 0, 0.19);
-    border-bottom: solid 2px #b5b5b5;
-    overflow: hidden;
+      @include mq(md) {
+        position: fixed;
+        top: 90%;
+        right: 20px !important;
+      }
 
-    @include mq(md) {
-      position: fixed;
-      top: 90%;
-      right: 20px !important;
+      &.icon-active {
+        color: rgb(128, 168, 255);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5),
+          0 2px 2px rgba(0, 0, 0, 0.19);
+        border-bottom: none;
+      }
     }
 
-    &.icon-active {
-      color: rgb(128, 168, 255);
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5),
-        0 2px 2px rgba(0, 0, 0, 0.19);
-      border-bottom: none;
+    .post-preview {
+      box-shadow: 5px 5px 25px -10px rgba(0, 0, 0, 0.3);
+      border-radius: 5px;
+      padding: 20px 15px;
+      border: 1px solid rgb(243, 243, 243);
     }
   }
-
-  .post-preview {
+  .post-form {
+    background: white;
     box-shadow: 5px 5px 25px -10px rgba(0, 0, 0, 0.3);
     border-radius: 5px;
     padding: 20px 15px;
     border: 1px solid rgb(243, 243, 243);
-  }
-}
-.post-form {
-  background: white;
-  box-shadow: 5px 5px 25px -10px rgba(0, 0, 0, 0.3);
-  border-radius: 5px;
-  padding: 20px 15px;
-  border: 1px solid rgb(243, 243, 243);
 
-  .form-group {
-    margin: 10px 0;
+    .form-group {
+      margin: 10px 0;
 
-    label {
-      display: block;
+      label {
+        display: block;
+        font-weight: bold;
+        font-size: 16px;
+        color: $GRAY01;
+      }
+
+      input {
+        border: 1px solid $BORDER_GRAY01;
+        display: block;
+        width: 100%;
+        padding: 8px 8px;
+        border-radius: 5px;
+        color: $INPUT_GRAY_COlOR;
+
+        &:focus {
+          outline: none;
+          border: 1px solid $BORDER_FOCUS_BLUE;
+        }
+      }
+
+      textarea {
+        border: 1px solid $BORDER_GRAY01;
+        display: block;
+        color: $INPUT_GRAY_COlOR;
+        border-radius: 5px;
+        width: 100%;
+        padding: 10px 8px;
+
+        &:focus {
+          outline: none;
+          border: 1px solid $BORDER_FOCUS_BLUE;
+        }
+      }
+    }
+    button {
+      color: white;
       font-weight: bold;
-      font-size: 16px;
-      color: $GRAY01;
-    }
-
-    input {
-      border: 1px solid $BORDER_GRAY01;
-      display: block;
-      width: 100%;
-      padding: 8px 8px;
-      border-radius: 5px;
-      color: $INPUT_GRAY_COlOR;
-
-      &:focus {
-        outline: none;
-        border: 1px solid $BORDER_FOCUS_BLUE;
-      }
-    }
-
-    textarea {
-      border: 1px solid $BORDER_GRAY01;
-      display: block;
-      color: $INPUT_GRAY_COlOR;
-      border-radius: 5px;
-      width: 100%;
-      padding: 10px 8px;
-
-      &:focus {
-        outline: none;
-        border: 1px solid $BORDER_FOCUS_BLUE;
-      }
+      border-radius: 3px;
+      padding: 5px 40px;
     }
   }
-  button {
-    color: white;
-    font-weight: bold;
+
+  .draft-btn{
+    cursor: pointer;
+    margin:0 0 0 20px;
+    padding: 7px 20px;
     border-radius: 3px;
-    padding: 5px 40px;
+    opacity:0.35;
+    background: #e6b1b1;
+    color: #fff;
   }
-}
 
-.draft-btn{
-  cursor: pointer;
-  margin:0 0 0 20px;
-  padding:10px 30px;
-  border-radius: 10px;
-  opacity:0.35;
-  background: #e6b1b1;
-  color: #fff;
-}
-
-.draft-btn-active{
-  opacity: 1;
+  .draft-btn-active{
+    opacity: 1;
+  }
 }
 </style>
