@@ -1,8 +1,8 @@
 <template>
   <div>
     <main>
-      <div class="profile-wrap MaxWidth640">
-        <h2>プロフィール</h2>
+      <div class="profile-wrap">
+        <h1>プロフィール編集</h1>
         <div v-if="$store.state.auth.auth_user">
           <div class="profile-form-group">
             <span class="profile-label"
@@ -43,28 +43,31 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-h2 {
-  font-size: 20px;
-  color: rgb(173, 173, 173);
-  margin-bottom: 20px;
-}
+main {
+  width: 90%;
+  max-width: 600px;
+  margin: 40px auto;
+  h1 {
+    margin: 0 0 20px 0;
+    color: #618be7;
+  }
+  .profile-label {
+    display: block;
+    font-weight: bold;
+    margin: 2px 0;
+  }
 
-.profile-label {
-  display: block;
-  font-weight: bold;
-  margin: 2px 0;
-}
+  .profile-wrap {
+    margin: 0 auto;
+    padding: 5px 10px;
 
-.profile-wrap {
-  margin: 0 auto;
-  padding: 5px 10px;
+    .profile-form-group {
+      margin-bottom: 20px;
 
-  .profile-form-group {
-    margin-bottom: 20px;
-
-    a {
-      color: $GRAY01;
-      font-size: 14px;
+      a {
+        color: $GRAY01;
+        font-size: 14px;
+      }
     }
   }
 }
