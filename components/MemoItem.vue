@@ -87,7 +87,11 @@ export default {
   data() {
     return {
       isOpenEllipsis: false,
+<<<<<<< HEAD
       status: this.post.likes[0],
+=======
+      status: this.post.likes[0].like,
+>>>>>>> master
     };
   },
 
