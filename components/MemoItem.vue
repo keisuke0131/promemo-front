@@ -87,7 +87,7 @@ export default {
   data() {
     return {
       isOpenEllipsis: false,
-      status: this.post.likes[0].like,
+      status: this.post.likes[0],
     };
   },
 
