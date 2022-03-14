@@ -18,10 +18,7 @@ export default {
   this.first_check(); 
  },
  mounted() {
-<<<<<<< HEAD
-=======
   this.first_check(); 
->>>>>>> master
  },
  methods: {
   first_check() {
