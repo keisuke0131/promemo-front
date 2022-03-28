@@ -66,7 +66,7 @@
             v-else
             type="button"
             @click.prevent="like_check"
-            class="btn btn-warning"
+            class="btn btn-warning like-color"
           >
             &#9829;</button
           ><a v-if="status == true" href="#">{{ count }}</a>
@@ -87,7 +87,7 @@ export default {
   data() {
     return {
       isOpenEllipsis: false,
-      status: this.post.likes[0].like,
+      status: this.post.likes[0],
     };
   },
 
@@ -122,6 +122,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.like-color {
+  color: rgb(255, 118, 118);
+}
+
 .v-leave-active,
 .v-enter-active {
   transition: opacity 0.2s;
@@ -216,7 +220,7 @@ export default {
 
     .DropdownList {
       i {
-        margin:0 3px 0 0;
+        margin: 0 3px 0 0;
       }
     }
   }

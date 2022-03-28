@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="wrap">
     <main>
       <h1>新規投稿画面</h1>
       <div class="post-form-wrap">
@@ -161,10 +161,15 @@ export default {
 <style src="@vueform/multiselect/themes/default.css"></style>
 
 <style lang="scss" scoped>
+.wrap {
+  background-color: #f6faff;
+  padding: 40px 0;
+}
 main {
   width: 90%;
   max-width: 1000px;
-  margin: 40px auto;
+  margin: 0px auto;
+  padding: 80px auto;
   h1 {
     color: #618be7;
   }
@@ -230,7 +235,7 @@ main {
   }
 
   .button-list {
-    margin:15px 0 0 0;
+    margin: 15px 0 0 0;
   }
 
   .draft-btn {
