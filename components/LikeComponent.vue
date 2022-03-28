@@ -1,7 +1,7 @@
 <template>
  <div>
     <button v-if="status == false" type="button" @click.prevent="like_check" class="btn btn-outline-warning">&#9825;</button><a v-if="status == false" href="#">{{count}}</a>
-    <button v-else type="button" @click.prevent="like_check" class="btn btn-warning">&#9829;</button><a v-if="status == true" href="#">{{count}}</a>
+    <button v-else type="button" @click.prevent="like_check" class="btn btn-warning like-color">&#9829;</button><a v-if="status == true" href="#">{{count}}</a>
  </div>
 </template>
 
@@ -50,3 +50,8 @@ export default {
  }
 }
 </script>
+<style scoped>
+.like-color{
+  color: red;
+}
+</style>

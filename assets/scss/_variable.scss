@@ -19,7 +19,7 @@ $INPUT_GRAY_COlOR: rgb(85, 85, 85);
 }
 
 .InputField {
-  color: $GRAY01 ;
+  color: $GRAY01;
   border: 1px solid $BORDER_GRAY01;
   display: block;
   width: 100%;
@@ -141,9 +141,10 @@ $INPUT_GRAY_COlOR: rgb(85, 85, 85);
 
 .two-columns-main {
   display: flex;
-  margin: 50px auto 0 auto;
-  padding: 0 50px;
+  margin: 0 auto;
+  padding: 50px;
   justify-content: center;
+  background-color: #f6faff;
 
   @include mq(lg) {
     display: block;
